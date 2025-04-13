@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gustavo Caiano | Computer Engineer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'dark-red': '#AB0000',
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-black text-white min-h-screen opacity-0 transition-opacity duration-1000">
+    <div class="container mx-auto px-4 py-12">
+        <header class="flex flex-col items-center mb-16">
+            <div class="rounded-full overflow-hidden w-48 h-48 mb-6 border-4 border-dark-red">
+                <img src="img/cv2.jpeg" alt="Gustavo Caiano" class="w-full h-full object-cover">
+            </div>
+            <h1 class="text-4xl md:text-6xl font-bold text-dark-red mb-2">Gustavo Caiano</h1>
+            <p class="text-xl text-gray-400">Computer Engineer | Laravel Developer</p>
+        </header>
+
+        <main>
+            <section class="mb-16">
+                <h2 class="text-3xl font-bold text-dark-red mb-6">About Me</h2>
+                <p class="text-lg leading-relaxed max-w-3xl mx-auto">
+                    Bachelor's degree in Computer Engineering from Instituto Superior de Engenharia do Porto (ISEP), 
+                    currently completing a Master's degree in Software Engineering at the same institution. 
+                    Developer focused on robust web applications and AI-based solutions.
+                </p>
+            </section>
+
+            <section class="mb-16">
+                <h2 class="text-3xl font-bold text-dark-red mb-6">Skills</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto">
+                    <div class="bg-gray-900 p-6 rounded-lg opacity-0 translate-y-4 transition-all duration-500">
+                        <h3 class="text-xl font-bold mb-3">Web Development</h3>
+                        <p>PHP, Laravel, Filament PHP, RESTful APIs, MySQL</p>
+                    </div>
+                    <div class="bg-gray-900 p-6 rounded-lg opacity-0 translate-y-4 transition-all duration-500">
+                        <h3 class="text-xl font-bold mb-3">Artificial Intelligence</h3>
+                        <p>Automatic Transcription, Natural Language Processing, AI Models</p>
+                    </div>
+                    <div class="bg-gray-900 p-6 rounded-lg opacity-0 translate-y-4 transition-all duration-500">
+                        <h3 class="text-xl font-bold mb-3">Software Engineering</h3>
+                        <p>CI/CD, Git, Docker, Agile Methodologies, Design Patterns</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="mb-16">
+                <h2 class="text-3xl font-bold text-dark-red mb-6">Academic Background</h2>
+                <div class="max-w-3xl mx-auto">
+                    <div class="mb-6">
+                        <h3 class="text-xl font-bold">Master's in Software Engineering</h3>
+                        <p class="text-gray-400">Instituto Superior de Engenharia do Porto (ISEP)</p>
+                        <p>In progress</p>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold">Bachelor's in Computer Engineering</h3>
+                        <p class="text-gray-400">Instituto Superior de Engenharia do Porto (ISEP)</p>
+                        <p>Completed</p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="text-3xl font-bold text-dark-red mb-6">Contact</h2>
+                <div class="flex justify-center space-x-6">
+                    <a href="https://github.com/gustavocaiano" class="text-white hover:text-dark-red transition">GitHub</a>
+                    <a href="mailto:contact@example.com" class="text-white hover:text-dark-red transition">Email</a>
+                    <a href="#" class="text-white hover:text-dark-red transition">LinkedIn</a>
+                </div>
+            </section>
+        </main>
+
+        <footer class="mt-20 pt-10 border-t border-gray-800 text-center text-gray-500">
+            <p>&copy; <span class="copyright-year">2025</span> Gustavo Caiano. All rights reserved.</p>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html> 

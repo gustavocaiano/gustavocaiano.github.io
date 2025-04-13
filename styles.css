@@ -1,0 +1,39 @@
+/* Custom styles to complement Tailwind CSS */
+
+/* Smooth transitions */
+* {
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+/* Custom hover effect for cards */
+.bg-gray-900:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px -5px rgba(139, 0, 0, 0.3);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+/* Gradient text effect for special elements if needed */
+.gradient-text {
+    background: linear-gradient(90deg, #8B0000, #FF0000);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #000000;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #8B0000;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #ff0000;
+} 
