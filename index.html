@@ -10,89 +10,185 @@
             theme: {
                 extend: {
                     colors: {
-                        'dark-red': '#AB0000',
+                        'dark-teal': '#0f766e',
+                        'light-teal': '#14b8a6',
+                        'accent-teal': '#5eead4',
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.6s ease-out',
+                        'fade-in-down': 'fadeInDown 0.6s ease-out',
+                        'pulse-slow': 'pulse 3s infinite',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        fadeInDown: {
+                            '0%': { opacity: '0', transform: 'translateY(-30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        }
                     }
                 }
             }
         }
     </script>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
-<body class="bg-gradient-to-b from-black to-red-950 text-white min-h-screen opacity-0 transition-opacity duration-1000">
-    <div class="container mx-auto px-4 py-12">
-        <header class="flex flex-col items-center mb-16">
-            <div class="rounded-full overflow-hidden w-48 h-48 mb-6 border-4 border-dark-red">
-                <img src="img/cv2.jpeg" alt="Gustavo Caiano" class="w-full h-full object-cover">
+<body class="bg-gradient-to-br from-slate-900 via-gray-900 to-teal-950 text-white min-h-screen opacity-0 transition-opacity duration-1000">
+    <!-- Animated background particles -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute top-1/4 left-1/4 w-2 h-2 bg-accent-teal rounded-full animate-pulse-slow"></div>
+        <div class="absolute top-3/4 right-1/4 w-1 h-1 bg-light-teal rounded-full animate-pulse-slow" style="animation-delay: 1s;"></div>
+        <div class="absolute top-1/2 left-3/4 w-1.5 h-1.5 bg-accent-teal rounded-full animate-pulse-slow" style="animation-delay: 2s;"></div>
+    </div>
+
+    <div class="container mx-auto px-4 py-12 relative z-10">
+        <header class="flex flex-col items-center mb-20">
+            <div class="relative group">
+                <div class="absolute -inset-1 bg-gradient-to-r from-light-teal to-accent-teal rounded-full blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-pulse-slow"></div>
+                <div class="relative rounded-full overflow-hidden w-48 h-48 mb-6 border-4 border-light-teal">
+                    <img src="img/cv3.jpeg" alt="Gustavo Caiano" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110">
+                </div>
             </div>
-            <h1 class="text-4xl md:text-6xl font-bold text-dark-red mb-2">Gustavo Caiano</h1>
-            <p class="text-xl text-gray-400">Computer Engineer | Laravel Developer</p>
+            <h1 class="text-4xl md:text-6xl font-bold bg-gradient-to-r from-light-teal to-accent-teal bg-clip-text text-transparent mb-2 animate-fade-in-down">Gustavo Caiano</h1>
+            <p class="text-xl text-gray-300 animate-fade-in-up">Computer Engineer | Laravel Developer</p>
+            <div class="flex space-x-4 mt-4 animate-fade-in-up" style="animation-delay: 0.3s;">
+                <div class="w-12 h-0.5 bg-gradient-to-r from-light-teal to-accent-teal"></div>
+                <div class="w-6 h-0.5 bg-gradient-to-r from-light-teal to-accent-teal"></div>
+                <div class="w-12 h-0.5 bg-gradient-to-r from-light-teal to-accent-teal"></div>
+            </div>
         </header>
 
         <main>
-            <section class="mb-16">
-                <h2 class="text-3xl font-bold text-dark-red mb-6">About Me</h2>
-                <p class="text-lg leading-relaxed max-w-3xl mx-auto">
-                    Bachelor's degree in Computer Engineering from Instituto Superior de Engenharia do Porto (ISEP), 
-                    currently completing a Master's degree in Software Engineering at the same institution. 
-                    Developer focused on robust web applications and AI-based solutions.
-                </p>
+            <section class="mb-20">
+                <h2 class="text-3xl font-bold text-light-teal mb-8 text-center">About Me</h2>
+                <div class="max-w-4xl mx-auto bg-gray-800/50 backdrop-blur-sm p-8 rounded-2xl border border-gray-700/50 hover:border-light-teal/50 transition-all duration-300">
+                    <p class="text-lg leading-relaxed text-gray-300">
+                        Bachelor's degree in Computer Engineering from Instituto Superior de Engenharia do Porto (ISEP), 
+                        currently completing a Master's degree in Software Engineering at the same institution. 
+                        Developer focused on robust web applications and AI-based solutions, passionate about creating 
+                        innovative digital experiences and solving complex technical challenges.
+                    </p>
+                </div>
             </section>
 
-            <section class="mb-16">
-                <h2 class="text-3xl font-bold text-dark-red mb-6">Skills</h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto">
-                    <div class="bg-gray-900 p-6 rounded-lg opacity-0 translate-y-4 transition-all duration-500">
-                        <h3 class="text-xl font-bold mb-3">Web Development</h3>
-                        <p>PHP, Laravel, Filament PHP, RESTful APIs, MySQL</p>
+            <section class="mb-20">
+                <h2 class="text-3xl font-bold text-light-teal mb-8 text-center">Skills</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                    <div class="skill-card bg-gray-800/50 backdrop-blur-sm p-8 rounded-2xl border border-gray-700/50 hover:border-light-teal/50 opacity-0 translate-y-4 transition-all duration-500 group">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-code text-2xl text-light-teal mr-3"></i>
+                            <h3 class="text-xl font-bold">Web Development</h3>
+                        </div>
+                        <p class="text-gray-300">PHP, Laravel, Filament PHP, RESTful APIs, MySQL</p>
+                        <div class="mt-4 h-1 bg-gray-700 rounded-full overflow-hidden">
+                            <div class="h-full bg-gradient-to-r from-light-teal to-accent-teal w-0 group-hover:w-full transition-all duration-1000"></div>
+                        </div>
                     </div>
-                    <div class="bg-gray-900 p-6 rounded-lg opacity-0 translate-y-4 transition-all duration-500">
-                        <h3 class="text-xl font-bold mb-3">Artificial Intelligence</h3>
-                        <p>Automatic Transcription, Natural Language Processing, AI Models</p>
+                    <div class="skill-card bg-gray-800/50 backdrop-blur-sm p-8 rounded-2xl border border-gray-700/50 hover:border-light-teal/50 opacity-0 translate-y-4 transition-all duration-500 group">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-brain text-2xl text-light-teal mr-3"></i>
+                            <h3 class="text-xl font-bold">Artificial Intelligence</h3>
+                        </div>
+                        <p class="text-gray-300">Automatic Transcription, Natural Language Processing, AI Models</p>
+                        <div class="mt-4 h-1 bg-gray-700 rounded-full overflow-hidden">
+                            <div class="h-full bg-gradient-to-r from-light-teal to-accent-teal w-0 group-hover:w-full transition-all duration-1000" style="transition-delay: 0.2s;"></div>
+                        </div>
                     </div>
-                    <div class="bg-gray-900 p-6 rounded-lg opacity-0 translate-y-4 transition-all duration-500">
-                        <h3 class="text-xl font-bold mb-3">Software Engineering</h3>
-                        <p>CI/CD, Git, Docker, Agile Methodologies, Design Patterns</p>
+                    <div class="skill-card bg-gray-800/50 backdrop-blur-sm p-8 rounded-2xl border border-gray-700/50 hover:border-light-teal/50 opacity-0 translate-y-4 transition-all duration-500 group">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-cogs text-2xl text-light-teal mr-3"></i>
+                            <h3 class="text-xl font-bold">Software Engineering</h3>
+                        </div>
+                        <p class="text-gray-300">CI/CD, Git, Docker, Agile Methodologies, Design Patterns</p>
+                        <div class="mt-4 h-1 bg-gray-700 rounded-full overflow-hidden">
+                            <div class="h-full bg-gradient-to-r from-light-teal to-accent-teal w-0 group-hover:w-full transition-all duration-1000" style="transition-delay: 0.4s;"></div>
+                        </div>
                     </div>
                 </div>
             </section>
 
-            <section class="mb-16">
-                <h2 class="text-3xl font-bold text-dark-red mb-6">Work Experience</h2>
-                <div class="max-w-3xl mx-auto bg-gray-900 p-6 rounded-lg">
-                    <h3 class="text-xl font-bold">Junior Developer</h3>
-                    <p class="text-gray-400 mb-2"><a href="https://novaforensic.com" target="_blank" class="hover:text-dark-red transition">NovaForensic</a> | Digital Forensics Company</p>
-                    <p class="mb-3">Current Position</p>
-                    <p>Working as a developer at NovaForensic, specializing in digital forensics software solutions and applications.</p>
+            <section class="mb-20">
+                <h2 class="text-3xl font-bold text-light-teal mb-8 text-center">Work Experience</h2>
+                <div class="max-w-4xl mx-auto">
+                    <div class="bg-gray-800/50 backdrop-blur-sm p-8 rounded-2xl border border-gray-700/50 hover:border-light-teal/50 transition-all duration-300 relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-light-teal to-accent-teal"></div>
+                        <div class="flex items-start justify-between flex-wrap gap-4">
+                            <div class="flex-1">
+                                <h3 class="text-2xl font-bold mb-2">Junior Developer</h3>
+                                <p class="text-light-teal mb-2 flex items-center">
+                                    <i class="fas fa-building mr-2"></i>
+                                    <a href="https://novaforensic.com" target="_blank" class="hover:text-accent-teal transition">NovaForensic</a> 
+                                    <span class="text-gray-400 ml-2">| Digital Forensics Company</span>
+                                </p>
+                                <p class="text-accent-teal mb-4 flex items-center">
+                                    <i class="fas fa-calendar mr-2"></i>
+                                    Current Position
+                                </p>
+                                <p class="text-gray-300 leading-relaxed">Working as a developer at NovaForensic, specializing in digital forensics software solutions and applications, contributing to cutting-edge forensic technology development.</p>
+                            </div>
+                            <div class="text-light-teal text-4xl opacity-20">
+                                <i class="fas fa-search"></i>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
 
-            <section class="mb-16">
-                <h2 class="text-3xl font-bold text-dark-red mb-6">Academic Background</h2>
-                <div class="max-w-3xl mx-auto">
-                    <div class="mb-6">
-                        <h3 class="text-xl font-bold">Master's in Software Engineering</h3>
-                        <p class="text-gray-400">Instituto Superior de Engenharia do Porto (ISEP)</p>
-                        <p>In progress</p>
+            <section class="mb-20">
+                <h2 class="text-3xl font-bold text-light-teal mb-8 text-center">Academic Background</h2>
+                <div class="max-w-4xl mx-auto space-y-6">
+                    <div class="bg-gray-800/50 backdrop-blur-sm p-8 rounded-2xl border border-gray-700/50 hover:border-light-teal/50 transition-all duration-300 relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-2 h-full bg-gradient-to-b from-light-teal to-accent-teal"></div>
+                        <div class="ml-6">
+                            <h3 class="text-xl font-bold mb-2">Master's in Software Engineering</h3>
+                            <p class="text-light-teal mb-1 flex items-center">
+                                <i class="fas fa-university mr-2"></i>
+                                Instituto Superior de Engenharia do Porto (ISEP)
+                            </p>
+                            <p class="text-accent-teal flex items-center">
+                                <i class="fas fa-clock mr-2"></i>
+                                In progress
+                            </p>
+                        </div>
                     </div>
-                    <div>
-                        <h3 class="text-xl font-bold">Bachelor's in Computer Engineering</h3>
-                        <p class="text-gray-400">Instituto Superior de Engenharia do Porto (ISEP)</p>
-                        <p>Completed</p>
+                    <div class="bg-gray-800/50 backdrop-blur-sm p-8 rounded-2xl border border-gray-700/50 hover:border-light-teal/50 transition-all duration-300 relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-2 h-full bg-gradient-to-b from-light-teal to-accent-teal"></div>
+                        <div class="ml-6">
+                            <h3 class="text-xl font-bold mb-2">Bachelor's in Computer Engineering</h3>
+                            <p class="text-light-teal mb-1 flex items-center">
+                                <i class="fas fa-university mr-2"></i>
+                                Instituto Superior de Engenharia do Porto (ISEP)
+                            </p>
+                            <p class="text-accent-teal flex items-center">
+                                <i class="fas fa-check-circle mr-2"></i>
+                                Completed
+                            </p>
+                        </div>
                     </div>
                 </div>
             </section>
 
-            <section>
-                <h2 class="text-3xl font-bold text-dark-red mb-6">Contact</h2>
-                <div class="flex justify-center space-x-6">
-                    <a href="https://github.com/gustavocaiano" class="text-white hover:text-dark-red transition">GitHub</a>
-                    <a href="mailto:gustavocaiano@outlook.com" class="text-white hover:text-dark-red transition">gustavocaiano@outlook.com</a>
+            <section class="mb-12">
+                <h2 class="text-3xl font-bold text-light-teal mb-8 text-center">Contact</h2>
+                <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-8">
+                    <a href="https://github.com/gustavocaiano" class="flex items-center text-white hover:text-accent-teal transition-all duration-300 group bg-gray-800/50 backdrop-blur-sm px-6 py-3 rounded-full border border-gray-700/50 hover:border-light-teal/50">
+                        <i class="fab fa-github text-xl mr-3 group-hover:scale-110 transition-transform"></i>
+                        GitHub
+                    </a>
+                    <a href="mailto:gustavocaiano@outlook.com" class="flex items-center text-white hover:text-accent-teal transition-all duration-300 group bg-gray-800/50 backdrop-blur-sm px-6 py-3 rounded-full border border-gray-700/50 hover:border-light-teal/50">
+                        <i class="fas fa-envelope text-xl mr-3 group-hover:scale-110 transition-transform"></i>
+                        Email
+                    </a>
                 </div>
             </section>
         </main>
 
-        <footer class="mt-20 pt-10 border-t border-gray-800 text-center text-gray-500">
+        <footer class="mt-20 pt-10 border-t border-gray-700/50 text-center text-gray-400">
             <p>&copy; <span class="copyright-year">2025</span> Gustavo Caiano. All rights reserved.</p>
+            <p class="mt-2 text-sm">Built with passion and modern web technologies</p>
         </footer>
     </div>
     <script src="script.js"></script>

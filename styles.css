@@ -2,38 +2,122 @@
 
 /* Smooth transitions */
 * {
-    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s, transform 0.3s;
 }
 
-/* Custom hover effect for cards */
-.bg-gray-900:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px -5px rgba(139, 0, 0, 0.3);
-    transition: transform 0.3s, box-shadow 0.3s;
+/* Enhanced hover effects for cards */
+.skill-card:hover,
+.bg-gray-800\/50:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px -10px rgba(20, 184, 166, 0.3);
 }
 
-/* Gradient text effect for special elements if needed */
+/* Gradient text effect for special elements */
 .gradient-text {
-    background: linear-gradient(90deg, #8B0000, #FF0000);
+    background: linear-gradient(90deg, #14b8a6, #5eead4);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
 }
 
-/* Custom scrollbar */
+/* Custom scrollbar with teal theme */
 ::-webkit-scrollbar {
     width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-    background: #000000;
+    background: #0f172a;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #8B0000;
+    background: linear-gradient(180deg, #14b8a6, #0f766e);
     border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #ff0000;
+    background: linear-gradient(180deg, #5eead4, #14b8a6);
+}
+
+/* Backdrop blur enhancement */
+.backdrop-blur-sm {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+/* Enhanced glow effects */
+.glow-teal {
+    box-shadow: 0 0 20px rgba(20, 184, 166, 0.5);
+}
+
+/* Animated gradient borders */
+@keyframes gradient-border {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.animated-border {
+    background: linear-gradient(-45deg, #14b8a6, #5eead4, #0f766e, #14b8a6);
+    background-size: 400% 400%;
+    animation: gradient-border 3s ease infinite;
+}
+
+/* Smooth page transitions */
+body {
+    overflow-x: hidden;
+}
+
+/* Enhanced focus states for accessibility */
+a:focus,
+button:focus {
+    outline: 2px solid #5eead4;
+    outline-offset: 2px;
+}
+
+/* Loading animation for images */
+img {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+img:hover {
+    transform: scale(1.02);
+}
+
+/* Text selection styling */
+::selection {
+    background-color: rgba(94, 234, 212, 0.3);
+    color: white;
+}
+
+::-moz-selection {
+    background-color: rgba(94, 234, 212, 0.3);
+    color: white;
+}
+
+/* Enhanced mobile responsiveness */
+@media (max-width: 768px) {
+    .skill-card:hover,
+    .bg-gray-800\/50:hover {
+        transform: translateY(-4px);
+    }
+}
+
+/* Subtle animation for background particles */
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+.animate-float {
+    animation: float 6s ease-in-out infinite;
+}
+
+/* Progress bar animation */
+@keyframes progress-fill {
+    from { width: 0%; }
+    to { width: 100%; }
+}
+
+.progress-bar {
+    animation: progress-fill 2s ease-out;
 } 
