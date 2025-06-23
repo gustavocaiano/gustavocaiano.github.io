@@ -38,13 +38,23 @@
     <!-- EmailJS -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
-<body class="bg-gradient-to-br from-slate-900 via-gray-900 to-teal-950 text-white min-h-screen opacity-0 transition-opacity duration-1000">
+<body class="bg-gradient-to-br from-teal-950 via-gray-900 to-teal-900 text-white min-h-screen opacity-0 transition-opacity duration-1000">
     <!-- Animated background particles -->
     <div class="fixed inset-0 overflow-hidden pointer-events-none">
-        <div class="absolute top-1/4 left-1/4 w-2 h-2 bg-accent-teal rounded-full animate-pulse-slow"></div>
-        <div class="absolute top-3/4 right-1/4 w-1 h-1 bg-light-teal rounded-full animate-pulse-slow" style="animation-delay: 1s;"></div>
-        <div class="absolute top-1/2 left-3/4 w-1.5 h-1.5 bg-accent-teal rounded-full animate-pulse-slow" style="animation-delay: 2s;"></div>
-    </div>
+        <!-- Original particles (move down with scroll) -->
+        <div class="absolute top-1/4 left-1/4 w-2 h-2 bg-accent-teal rounded-full animate-pulse-slow particle-down"></div>
+        <div class="absolute top-3/4 right-1/4 w-1 h-1 bg-light-teal rounded-full animate-pulse-slow particle-down" style="animation-delay: 1s;"></div>
+        <div class="absolute top-1/2 left-3/4 w-1.5 h-1.5 bg-accent-teal rounded-full animate-pulse-slow particle-down" style="animation-delay: 2s;"></div>
+        
+        <!-- New side particles (move up with scroll) -->
+        <div class="absolute top-2/3 left-8 w-1 h-1 bg-accent-teal rounded-full animate-pulse-slow particle-up" style="animation-delay: 2.5s;"></div>
+
+        
+        <div class="absolute top-1/4 right-12 w-1 h-1 bg-accent-teal rounded-full animate-pulse-slow particle-up" style="animation-delay: 3s;"></div>
+
+        
+        <!-- Additional scattered particles -->
+  </div>
 
     <div class="container mx-auto px-4 py-12 relative z-10">
         <header class="flex flex-col items-center mb-20">
