@@ -1,6 +1,8 @@
 // Enhanced JavaScript for modern portfolio site
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Initialize EmailJS
+    emailjs.init("YOUR_PUBLIC_KEY"); // Replace with your actual EmailJS public key
     // Add a subtle fade-in effect on page load
     document.body.classList.add('opacity-100');
     
@@ -157,4 +159,72 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     window.addEventListener('scroll', requestTick);
+
+    // Contact Form Handling
+    const contactForm = document.getElementById('contactForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const statusMessage = document.getElementById('statusMessage');
+    const successMessage = document.getElementById('successMessage');
+    const errorMessage = document.getElementById('errorMessage');
+    const submitText = document.querySelector('.submit-text');
+    const loadingText = document.querySelector('.loading-text');
+
+    if (contactForm) {
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Show loading state
+            submitBtn.disabled = true;
+            submitText.classList.add('hidden');
+            loadingText.classList.remove('hidden');
+            statusMessage.classList.add('hidden');
+            
+            // Get form data
+            const formData = new FormData(contactForm);
+            const templateParams = {
+                firstName: formData.get('firstName'),
+                lastName: formData.get('lastName'),
+                email: formData.get('email'),
+                subject: formData.get('subject'),
+                message: formData.get('message'),
+                to_name: 'Gustavo Caiano'
+            };
+            
+            try {
+                // Replace with your actual EmailJS service ID and template ID
+                await emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams);
+                
+                // Show success message
+                statusMessage.classList.remove('hidden');
+                successMessage.classList.remove('hidden');
+                errorMessage.classList.add('hidden');
+                
+                // Reset form
+                contactForm.reset();
+                
+                // Hide success message after 5 seconds
+                setTimeout(() => {
+                    statusMessage.classList.add('hidden');
+                }, 5000);
+                
+            } catch (error) {
+                console.error('EmailJS error:', error);
+                
+                // Show error message
+                statusMessage.classList.remove('hidden');
+                errorMessage.classList.remove('hidden');
+                successMessage.classList.add('hidden');
+                
+                // Hide error message after 5 seconds
+                setTimeout(() => {
+                    statusMessage.classList.add('hidden');
+                }, 5000);
+            } finally {
+                // Reset button state
+                submitBtn.disabled = false;
+                submitText.classList.remove('hidden');
+                loadingText.classList.add('hidden');
+            }
+        });
+    }
 }); 

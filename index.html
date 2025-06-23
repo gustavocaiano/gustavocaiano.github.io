@@ -35,6 +35,8 @@
     </script>
     <link rel="stylesheet" href="styles.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- EmailJS -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 <body class="bg-gradient-to-br from-slate-900 via-gray-900 to-teal-950 text-white min-h-screen opacity-0 transition-opacity duration-1000">
     <!-- Animated background particles -->
@@ -182,17 +184,105 @@
                 </div>
             </section>
 
+            <section class="mb-20">
+                <h2 class="text-3xl font-bold text-light-teal mb-8 text-center">How I Can Help</h2>
+                <div class="max-w-4xl mx-auto bg-gray-800/50 backdrop-blur-sm p-8 rounded-2xl border border-gray-700/50 hover:border-light-teal/50 transition-all duration-300">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="text-center">
+                            <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-light-teal to-accent-teal rounded-full mb-4">
+                                <i class="fas fa-laptop-code text-2xl text-white"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2 text-light-teal">Personal Projects</h3>
+                            <p class="text-gray-300 leading-relaxed">
+                                Looking to bring your personal project to life? I can help you build modern web applications, 
+                                from concept to deployment, using the latest technologies and best practices.
+                            </p>
+                        </div>
+                        <div class="text-center">
+                            <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-light-teal to-accent-teal rounded-full mb-4">
+                                <i class="fas fa-handshake text-2xl text-white"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2 text-light-teal">Software Consulting</h3>
+                            <p class="text-gray-300 leading-relaxed">
+                                Need technical guidance or code review? I offer software consulting services to help 
+                                optimize your existing projects, implement new features, or solve complex technical challenges.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             <section class="mb-12">
-                <h2 class="text-3xl font-bold text-light-teal mb-8 text-center">Contact</h2>
-                <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-8">
-                    <a href="https://github.com/gustavocaiano" class="flex items-center text-white hover:text-accent-teal transition-all duration-300 group bg-gray-800/50 backdrop-blur-sm px-6 py-3 rounded-full border border-gray-700/50 hover:border-light-teal/50">
-                        <i class="fab fa-github text-xl mr-3 group-hover:scale-110 transition-transform"></i>
-                        GitHub
-                    </a>
-                    <a href="mailto:gustavocaiano@outlook.com" class="flex items-center text-white hover:text-accent-teal transition-all duration-300 group bg-gray-800/50 backdrop-blur-sm px-6 py-3 rounded-full border border-gray-700/50 hover:border-light-teal/50">
-                        <i class="fas fa-envelope text-xl mr-3 group-hover:scale-110 transition-transform"></i>
-                        Email
-                    </a>
+                <h2 class="text-3xl font-bold text-light-teal mb-8 text-center">Get In Touch</h2>
+                <div class="max-w-2xl mx-auto">
+                    <!-- Contact Form -->
+                    <form id="contactForm" class="bg-gray-800/50 backdrop-blur-sm p-8 rounded-2xl border border-gray-700/50 hover:border-light-teal/50 transition-all duration-300 mb-8">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label for="firstName" class="block text-sm font-medium text-gray-300 mb-2">First Name</label>
+                                <input type="text" id="firstName" name="firstName" required 
+                                       class="w-full px-4 py-3 bg-gray-900/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:border-light-teal focus:outline-none focus:ring-2 focus:ring-light-teal/50 transition-all duration-300">
+                            </div>
+                            <div>
+                                <label for="lastName" class="block text-sm font-medium text-gray-300 mb-2">Last Name</label>
+                                <input type="text" id="lastName" name="lastName" required 
+                                       class="w-full px-4 py-3 bg-gray-900/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:border-light-teal focus:outline-none focus:ring-2 focus:ring-light-teal/50 transition-all duration-300">
+                            </div>
+                        </div>
+                        <div class="mb-6">
+                            <label for="email" class="block text-sm font-medium text-gray-300 mb-2">Email Address</label>
+                            <input type="email" id="email" name="email" required 
+                                   class="w-full px-4 py-3 bg-gray-900/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:border-light-teal focus:outline-none focus:ring-2 focus:ring-light-teal/50 transition-all duration-300">
+                        </div>
+                        <div class="mb-6">
+                            <label for="subject" class="block text-sm font-medium text-gray-300 mb-2">Subject</label>
+                            <select id="subject" name="subject" required 
+                                    class="w-full px-4 py-3 bg-gray-900/50 border border-gray-600 rounded-lg text-white focus:border-light-teal focus:outline-none focus:ring-2 focus:ring-light-teal/50 transition-all duration-300">
+                                <option value="">Select a subject</option>
+                                <option value="Personal Project">Personal Project</option>
+                                <option value="Software Consulting">Software Consulting</option>
+                                <option value="Job Opportunity">Job Opportunity</option>
+                                <option value="General Inquiry">General Inquiry</option>
+                            </select>
+                        </div>
+                        <div class="mb-6">
+                            <label for="message" class="block text-sm font-medium text-gray-300 mb-2">Message</label>
+                            <textarea id="message" name="message" rows="5" required 
+                                      class="w-full px-4 py-3 bg-gray-900/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:border-light-teal focus:outline-none focus:ring-2 focus:ring-light-teal/50 transition-all duration-300 resize-vertical" 
+                                      placeholder="Tell me about your project or inquiry..."></textarea>
+                        </div>
+                        <button type="submit" id="submitBtn" 
+                                class="w-full bg-gradient-to-r from-light-teal to-accent-teal text-white font-bold py-3 px-6 rounded-lg hover:from-dark-teal hover:to-light-teal transform hover:scale-105 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none">
+                            <span class="submit-text">Send Message</span>
+                            <span class="loading-text hidden">
+                                <i class="fas fa-spinner fa-spin mr-2"></i>Sending...
+                            </span>
+                        </button>
+                        
+                        <!-- Success/Error Messages -->
+                        <div id="statusMessage" class="mt-4 p-4 rounded-lg hidden">
+                            <div id="successMessage" class="hidden text-green-400">
+                                <i class="fas fa-check-circle mr-2"></i>
+                                <span>Thank you! Your message has been sent successfully. I'll get back to you soon.</span>
+                            </div>
+                            <div id="errorMessage" class="hidden text-red-400">
+                                <i class="fas fa-exclamation-circle mr-2"></i>
+                                <span>Sorry, there was an error sending your message. Please try again or contact me directly.</span>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!-- Social Links -->
+                    <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-8">
+                        <a href="https://github.com/gustavocaiano" class="flex items-center text-white hover:text-accent-teal transition-all duration-300 group bg-gray-800/50 backdrop-blur-sm px-6 py-3 rounded-full border border-gray-700/50 hover:border-light-teal/50">
+                            <i class="fab fa-github text-xl mr-3 group-hover:scale-110 transition-transform"></i>
+                            GitHub
+                        </a>
+                        <a href="mailto:gustavocaiano@outlook.com" class="flex items-center text-white hover:text-accent-teal transition-all duration-300 group bg-gray-800/50 backdrop-blur-sm px-6 py-3 rounded-full border border-gray-700/50 hover:border-light-teal/50">
+                            <i class="fas fa-envelope text-xl mr-3 group-hover:scale-110 transition-transform"></i>
+                            Direct Email
+                        </a>
+                    </div>
                 </div>
             </section>
         </main>
