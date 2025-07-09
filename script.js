@@ -22,6 +22,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Add a subtle fade-in effect on page load
     document.body.classList.add('opacity-100');
     
+    // Initialize language system
+    initializeLanguage();
+    
     // Add current year to footer copyright
     const yearElement = document.querySelector('.copyright-year');
     if (yearElement) {
