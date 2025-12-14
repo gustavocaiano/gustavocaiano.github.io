@@ -1,39 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gustavo Caiano | Computer Engineer</title>
-    
+
     <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' style='stop-color:%2314b8a6;stop-opacity:1' /><stop offset='100%25' style='stop-color:%235eead4;stop-opacity:1' /></linearGradient></defs><rect width='100' height='100' rx='20' fill='url(%23grad)'/><text x='50' y='60' font-family='system-ui,-apple-system,sans-serif' font-size='32' font-weight='bold' text-anchor='middle' fill='white'>GC</text></svg>">
-    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' style='stop-color:%2314b8a6;stop-opacity:1' /><stop offset='100%25' style='stop-color:%235eead4;stop-opacity:1' /></linearGradient></defs><rect width='100' height='100' rx='20' fill='url(%23grad)'/><text x='50' y='60' font-family='system-ui,-apple-system,sans-serif' font-size='32' font-weight='bold' text-anchor='middle' fill='white'>GC</text></svg>">
-    
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' style='stop-color:%2322d3ee;stop-opacity:1' /><stop offset='100%25' style='stop-color:%23a78bfa;stop-opacity:1' /></linearGradient></defs><rect width='100' height='100' rx='20' fill='url(%23grad)'/><text x='50' y='65' font-family='system-ui,-apple-system,sans-serif' font-size='36' font-weight='bold' text-anchor='middle' fill='white'>GC</text></svg>">
+    <link rel="apple-touch-icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' style='stop-color:%2322d3ee;stop-opacity:1' /><stop offset='100%25' style='stop-color:%23a78bfa;stop-opacity:1' /></linearGradient></defs><rect width='100' height='100' rx='20' fill='url(%23grad)'/><text x='50' y='65' font-family='system-ui,-apple-system,sans-serif' font-size='36' font-weight='bold' text-anchor='middle' fill='white'>GC</text></svg>">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
+                    fontFamily: {
+                        'display': ['Outfit', 'sans-serif'],
+                        'mono': ['JetBrains Mono', 'monospace'],
+                    },
                     colors: {
-                        'dark-teal': '#0f766e',
-                        'light-teal': '#14b8a6',
-                        'accent-teal': '#5eead4',
+                        'accent-cyan': '#22d3ee',
+                        'accent-violet': '#a78bfa',
+                        'accent-pink': '#f472b6',
+                        'dark-primary': '#0a0f1a',
+                        'dark-secondary': '#111827',
                     },
-                    animation: {
-                        'fade-in-up': 'fadeInUp 0.6s ease-out',
-                        'fade-in-down': 'fadeInDown 0.6s ease-out',
-                        'pulse-slow': 'pulse 3s infinite',
-                    },
-                    keyframes: {
-                        fadeInUp: {
-                            '0%': { opacity: '0', transform: 'translateY(30px)' },
-                            '100%': { opacity: '1', transform: 'translateY(0)' }
-                        },
-                        fadeInDown: {
-                            '0%': { opacity: '0', transform: 'translateY(-30px)' },
-                            '100%': { opacity: '1', transform: 'translateY(0)' }
-                        }
-                    }
                 }
             }
         }
@@ -43,130 +37,199 @@
     <!-- EmailJS -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
-<body class="bg-gradient-to-br from-teal-950 via-gray-900 to-teal-900 text-white min-h-screen opacity-0 transition-opacity duration-1000">
-    <!-- Animated background particles -->
+
+<body class="min-h-screen opacity-0 transition-opacity duration-1000">
+    <!-- Atmospheric background layers -->
+    <div class="mesh-gradient"></div>
+    <div class="noise-overlay"></div>
+    <div class="grid-pattern"></div>
+
+    <!-- Floating orbs -->
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
+    <!-- Particles -->
     <div class="fixed inset-0 overflow-hidden pointer-events-none">
-        <!-- Original particles (move down with scroll) -->
-        <div class="absolute top-1/4 left-1/4 w-2 h-2 bg-accent-teal rounded-full animate-pulse-slow particle-down"></div>
-        <div class="absolute top-3/4 right-1/4 w-1 h-1 bg-light-teal rounded-full animate-pulse-slow particle-down" style="animation-delay: 1s;"></div>
-        <div class="absolute top-1/2 left-3/4 w-1.5 h-1.5 bg-accent-teal rounded-full animate-pulse-slow particle-down" style="animation-delay: 2s;"></div>
-        
-        <!-- New side particles (move up with scroll) -->
-        <div class="absolute top-2/3 left-8 w-1 h-1 bg-accent-teal rounded-full animate-pulse-slow particle-up" style="animation-delay: 2.5s;"></div>
+        <div class="particle particle-down absolute top-1/4 left-1/4 w-1.5 h-1.5 bg-accent-cyan rounded-full opacity-60"
+            style="animation: float 8s ease-in-out infinite;"></div>
+        <div class="particle particle-down absolute top-3/4 right-1/4 w-1 h-1 bg-accent-violet rounded-full opacity-50"
+            style="animation: float 10s ease-in-out infinite 1s;"></div>
+        <div class="particle particle-up absolute top-1/2 left-3/4 w-1 h-1 bg-accent-pink rounded-full opacity-40"
+            style="animation: float 12s ease-in-out infinite 2s;"></div>
+        <div class="particle particle-up absolute top-2/3 left-8 w-0.5 h-0.5 bg-accent-cyan rounded-full opacity-50"
+            style="animation: float 9s ease-in-out infinite 2.5s;"></div>
+        <div class="particle particle-up absolute top-1/4 right-12 w-1 h-1 bg-accent-violet rounded-full opacity-40"
+            style="animation: float 11s ease-in-out infinite 3s;"></div>
+    </div>
 
-        
-        <div class="absolute top-1/4 right-12 w-1 h-1 bg-accent-teal rounded-full animate-pulse-slow particle-up" style="animation-delay: 3s;"></div>
-
-        
-        <!-- Additional scattered particles -->
-  </div>
-
-    <div class="container mx-auto px-4 py-12 relative z-10">
-        <header class="flex flex-col items-center mb-20">
-            <div class="relative group">
-                <div class="absolute -inset-1 bg-gradient-to-r from-light-teal to-accent-teal rounded-full blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-pulse-slow"></div>
-                <div class="relative rounded-full overflow-hidden w-48 h-48 mb-6 border-4 border-light-teal">
-                    <img src="img/cv4_cropped.jpeg" alt="Gustavo Caiano" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110">
+    <div class="container mx-auto px-6 py-16 relative z-10">
+        <!-- Header -->
+        <header class="flex flex-col items-center mb-24">
+            <!-- Profile Image -->
+            <div class="relative mb-8">
+                <div class="profile-glow"></div>
+                <div class="profile-ring">
+                    <div class="relative rounded-full overflow-hidden w-44 h-44 md:w-52 md:h-52">
+                        <img src="img/cv5_cropped.png" alt="Gustavo Caiano"
+                            class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                    </div>
                 </div>
             </div>
-            <h1 class="text-4xl md:text-6xl font-bold bg-gradient-to-r from-light-teal to-accent-teal bg-clip-text text-transparent mb-2 animate-fade-in-down">Gustavo Caiano</h1>
-            <p class="text-xl text-gray-300 animate-fade-in-up" data-translate="subtitle">Computer Engineer | Laravel Developer</p>
-            <div class="flex space-x-4 mt-4 animate-fade-in-up" style="animation-delay: 0.3s;">
-                <div class="w-12 h-0.5 bg-gradient-to-r from-light-teal to-accent-teal"></div>
-                <div class="w-6 h-0.5 bg-gradient-to-r from-light-teal to-accent-teal"></div>
-                <div class="w-12 h-0.5 bg-gradient-to-r from-light-teal to-accent-teal"></div>
+
+            <!-- Name -->
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-display font-bold title-gradient mb-4 text-center">
+                Gustavo Caiano
+            </h1>
+
+            <!-- Subtitle -->
+            <p class="subtitle text-center mb-6" data-translate="subtitle">Computer Engineer | Laravel Developer</p>
+
+            <!-- Decorative divider -->
+            <div class="divider mt-2">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
-            
+
             <!-- Language Selector -->
-            <div class="mt-6 animate-fade-in-up" style="animation-delay: 0.4s;">
-                <select id="languageSelector" onchange="setLanguage(this.value)" 
-                        class="bg-gray-800/50 backdrop-blur-sm text-white px-4 py-2 rounded-lg border border-gray-700/50 hover:border-light-teal/50 focus:border-light-teal focus:outline-none focus:ring-2 focus:ring-light-teal/50 transition-all duration-300">
+            <div class="mt-8">
+                <select id="languageSelector" onchange="setLanguage(this.value)" class="language-select">
                     <option value="en">🇺🇸 English</option>
                     <option value="pt">🇵🇹 Português</option>
                 </select>
             </div>
         </header>
 
-        <main>
-            <section class="mb-20">
-                <h2 class="text-3xl font-bold text-light-teal mb-8 text-center" data-translate="about">About Me</h2>
-                <div class="max-w-4xl mx-auto bg-gray-800/50 backdrop-blur-sm p-8 rounded-2xl border border-gray-700/50 hover:border-light-teal/50 transition-all duration-300">
-                    <p class="text-lg leading-relaxed text-gray-300" data-translate="aboutText">
-                        Bachelor's degree in Computer Engineering from Instituto Superior de Engenharia do Porto (ISEP), 
-                        currently completing a Master's degree in Software Engineering at the same institution. 
-                        Developer focused on robust web applications and AI-based solutions, passionate about creating 
+        <main class="space-y-24">
+            <!-- About Section -->
+            <section class="animate-fade-in-up stagger-1" style="opacity: 0;">
+                <h2 class="section-title" data-translate="about">About Me</h2>
+                <div class="max-w-4xl mx-auto card">
+                    <p class="text-lg leading-relaxed text-slate-300 font-display" data-translate="aboutText">
+                        Bachelor's degree in Computer Engineering from Instituto Superior de Engenharia do Porto (ISEP),
+                        currently completing a Master's degree in Software Engineering at the same institution.
+                        Developer focused on robust web applications and AI-based solutions, passionate about creating
                         innovative digital experiences and solving complex technical challenges.
                     </p>
                 </div>
             </section>
 
-            <section class="mb-20">
-                <h2 class="text-3xl font-bold text-light-teal mb-8 text-center" data-translate="skills">Skills</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
-                    <div class="skill-card bg-gray-800/50 backdrop-blur-sm p-8 rounded-2xl border border-gray-700/50 hover:border-light-teal/50 opacity-0 translate-y-4 transition-all duration-500 group">
-                        <div class="flex items-center mb-4">
-                            <i class="fas fa-code text-2xl text-light-teal mr-3"></i>
-                            <h3 class="text-xl font-bold" data-translate="skillWeb">Web Dev (My Strengths)</h3>
+            <!-- Skills Section -->
+            <section class="animate-fade-in-up stagger-2" style="opacity: 0;">
+                <h2 class="section-title" data-translate="skills">My Specialties</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+                    <!-- Web Development -->
+                    <div class="card skill-card opacity-0 translate-y-4 transition-all duration-500">
+                        <div class="skill-icon">
+                            <i class="fas fa-code"></i>
                         </div>
-                        <p class=" h-full text-gray-300" data-translate="skillWebText">Filament PHP (PHP and Laravel), REST APIs, Vue.js, React, Next.js</p>
-                       
-                        <div class="mt-4 h-1 bg-gray-700 rounded-full overflow-hidden">
-                            <div class="h-full bg-gradient-to-r from-light-teal to-accent-teal w-0 group-hover:w-full transition-all duration-1000"></div>
-                        </div>
-                    </div>
-                    <div class="skill-card bg-gray-800/50 backdrop-blur-sm p-8 rounded-2xl border border-gray-700/50 hover:border-light-teal/50 opacity-0 translate-y-4 transition-all duration-500 group">
-                        <div class="flex items-center mb-4">
-                            <i class="fas fa-brain text-2xl text-light-teal mr-3"></i>
-                            <h3 class="text-xl font-bold" data-translate="skillAI">Artificial Intelligence</h3>
-                        </div>
-                        <p class="h-full text-gray-300" data-translate="skillAIText">Automatic Transcription, Natural Language Processing, AI Models</p>
-                        <div class="mt-4 h-1 bg-gray-700 rounded-full overflow-hidden">
-                            <div class="h-full bg-gradient-to-r from-light-teal to-accent-teal w-0 group-hover:w-full transition-all duration-1000" style="transition-delay: 0.2s;"></div>
+                        <h3 class="skill-title" data-translate="skillWeb">Web Development</h3>
+                        <p class="skill-text" data-translate="skillWebText">Laravel & Filament PHP, REST APIs, Vue.js,
+                            React, Next.js</p>
+                        <div class="skill-bar">
+                            <div class="skill-bar-fill"></div>
                         </div>
                     </div>
-                    <div class="skill-card bg-gray-800/50 backdrop-blur-sm p-8 rounded-2xl border border-gray-700/50 hover:border-light-teal/50 opacity-0 translate-y-4 transition-all duration-500 group">
-                        <div class="flex items-center mb-4">
-                            <i class="fas fa-tools text-2xl text-light-teal mr-3"></i>
-                            <h3 class="text-xl font-bold" data-translate="skillTools">Tools & Technologies</h3>
+
+                    <!-- Software Architecture -->
+                    <div class="card skill-card opacity-0 translate-y-4 transition-all duration-500">
+                        <div class="skill-icon">
+                            <i class="fas fa-layer-group"></i>
                         </div>
-                        <p class="h-full text-gray-300" data-translate="skillToolsText">Git, Docker, SQL, Tailwind CSS, HTML and CSS, JS and TS, Linux, AWS, SonarQube, Jenkins, Github Actions</p>
-                        <div class="mt-4 h-1 bg-gray-700 rounded-full overflow-hidden">
-                            <div class="h-full bg-gradient-to-r from-light-teal to-accent-teal w-0 group-hover:w-full transition-all duration-1000" style="transition-delay: 0.4s;"></div>
+                        <h3 class="skill-title" data-translate="skillArchitecture">Software Architecture</h3>
+                        <p class="skill-text" data-translate="skillArchitectureText">Modular & Scalable Design, Layered
+                            Architecture, Design Patterns, Microservices</p>
+                        <div class="skill-bar">
+                            <div class="skill-bar-fill"></div>
                         </div>
                     </div>
-                    <div class="skill-card bg-gray-800/50 backdrop-blur-sm p-8 rounded-2xl border border-gray-700/50 hover:border-light-teal/50 opacity-0 translate-y-4 transition-all duration-500 group">
-                        <div class="flex items-center mb-4">
-                            <i class="fas fa-cogs text-2xl text-light-teal mr-3"></i>
-                            <h3 class="text-xl font-bold" data-translate="skillSoftware">Software Engineering</h3>
+
+                    <!-- AI & Data -->
+                    <div class="card skill-card opacity-0 translate-y-4 transition-all duration-500">
+                        <div class="skill-icon">
+                            <i class="fas fa-brain"></i>
                         </div>
-                        <p class="h-full text-gray-300" data-translate="skillSoftwareText">Design Patterns, Agile, CI/CD, Parallel Programming, Quality Testing, Microservices, Secure Software</p>
-                        <div class="mt-4 h-1 bg-gray-700 rounded-full overflow-hidden">
-                            <div class="h-full bg-gradient-to-r from-light-teal to-accent-teal w-0 group-hover:w-full transition-all duration-1000" style="transition-delay: 0.6s;"></div>
+                        <h3 class="skill-title" data-translate="skillAI">AI & Data Analysis</h3>
+                        <p class="skill-text" data-translate="skillAIText">Automatic Transcription, NLP, AI Models, Data
+                            Analysis, European R&D Projects</p>
+                        <div class="skill-bar">
+                            <div class="skill-bar-fill"></div>
+                        </div>
+                    </div>
+
+                    <!-- Cybersecurity & Networks -->
+                    <div class="card skill-card opacity-0 translate-y-4 transition-all duration-500">
+                        <div class="skill-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3 class="skill-title" data-translate="skillSecurity">Cybersecurity & Networks</h3>
+                        <p class="skill-text" data-translate="skillSecurityText">Firewall Policies, VPNs, Network
+                            Security, Secure Software Development</p>
+                        <div class="skill-bar">
+                            <div class="skill-bar-fill"></div>
+                        </div>
+                    </div>
+
+                    <!-- DevOps & Tools -->
+                    <div class="card skill-card opacity-0 translate-y-4 transition-all duration-500">
+                        <div class="skill-icon">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <h3 class="skill-title" data-translate="skillTools">DevOps & Tools</h3>
+                        <p class="skill-text" data-translate="skillToolsText">Git, Docker, Linux, AWS, CI/CD Pipelines,
+                            SQL Databases</p>
+                        <div class="skill-bar">
+                            <div class="skill-bar-fill"></div>
+                        </div>
+                    </div>
+
+                    <!-- Software Engineering -->
+                    <div class="card skill-card opacity-0 translate-y-4 transition-all duration-500">
+                        <div class="skill-icon">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <h3 class="skill-title" data-translate="skillSoftware">Software Engineering</h3>
+                        <p class="skill-text" data-translate="skillSoftwareText">Agile Methodologies, Parallel
+                            Programming, Full-Stack Development</p>
+                        <div class="skill-bar">
+                            <div class="skill-bar-fill"></div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <section class="mb-20 mt-28">
-                <h2 class="text-3xl font-bold text-light-teal mb-8 text-center" data-translate="workExperience">Work Experience</h2>
+            <!-- Work Experience Section -->
+            <section class="animate-fade-in-up stagger-3" style="opacity: 0;">
+                <h2 class="section-title" data-translate="workExperience">Work Experience</h2>
                 <div class="max-w-4xl mx-auto">
-                    <div class="bg-gray-800/50 backdrop-blur-sm p-8 rounded-2xl border border-gray-700/50 hover:border-light-teal/50 transition-all duration-300 relative overflow-hidden">
-                        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-light-teal to-accent-teal"></div>
-                        <div class="flex items-start justify-between flex-wrap gap-4">
-                            <div class="flex-1">
-                                <h3 class="text-2xl font-bold mb-2" data-translate="jobTitle">Mid-Level Developer</h3>
-                                <p class="text-light-teal mb-2 flex items-center">
-                                    <i class="fas fa-building mr-2"></i>
-                                    <a href="https://novaforensic.com" target="_blank" class="hover:text-accent-teal transition" data-translate="jobCompany">NovaForensic</a> 
-                                    <span class="text-gray-400 ml-2">| <span data-translate="jobType">Digital Forensics Company</span></span>
+                    <div class="card experience-card">
+                        <div class="experience-badge">
+                            <i class="fas fa-circle text-xs animate-pulse"></i>
+                            <span data-translate="jobCurrent">Current Position</span>
+                        </div>
+
+                        <div class="flex items-start justify-between flex-wrap gap-6">
+                            <div class="flex-1 min-w-0">
+                                <h3 class="text-2xl font-display font-bold mb-3" data-translate="jobTitle">Mid-Level
+                                    Developer</h3>
+                                <p class="text-accent-cyan mb-2 flex items-center gap-2 flex-wrap">
+                                    <i class="fas fa-building"></i>
+                                    <a href="https://novaforensic.com" target="_blank"
+                                        class="hover:text-accent-violet transition-colors"
+                                        data-translate="jobCompany">NovaForensic</a>
+                                    <span class="text-slate-400 font-mono text-sm">| <span
+                                            data-translate="jobType">Digital Forensics Company</span></span>
                                 </p>
-                                <p class="text-accent-teal mb-4 flex items-center">
-                                    <i class="fas fa-calendar mr-2"></i>
-                                    <span data-translate="jobCurrent">Current Position</span>
+                                <p class="text-accent-violet mb-3 flex items-center gap-2 font-mono text-sm">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    <span data-translate="jobDate">February 2024 - Present</span>
                                 </p>
-                                <p class="text-gray-300 leading-relaxed" data-translate="jobDescription">Working as a developer at NovaForensic, specializing in digital forensics software solutions and applications, contributing to cutting-edge forensic technology development.</p>
+                                <p class="text-slate-300 leading-relaxed" data-translate="jobDescription">Working
+                                    as a developer at NovaForensic, specializing in digital forensics software solutions
+                                    and applications, contributing to cutting-edge forensic technology development.</p>
                             </div>
-                            <div class="text-light-teal text-4xl opacity-20">
+                            <div class="text-accent-cyan/20 text-6xl">
                                 <i class="fas fa-search"></i>
                             </div>
                         </div>
@@ -174,136 +237,144 @@
                 </div>
             </section>
 
-            <section class="mb-20">
-                <h2 class="text-3xl font-bold text-light-teal mb-8 text-center" data-translate="academic">Academic Background</h2>
+            <!-- Academic Section -->
+            <section class="animate-fade-in-up stagger-4" style="opacity: 0;">
+                <h2 class="section-title" data-translate="academic">Academic Background</h2>
                 <div class="max-w-4xl mx-auto space-y-6">
-                    <div class="bg-gray-800/50 backdrop-blur-sm p-8 rounded-2xl border border-gray-700/50 hover:border-light-teal/50 transition-all duration-300 relative overflow-hidden">
-                        <div class="absolute top-0 left-0 w-2 h-full bg-gradient-to-b from-light-teal to-accent-teal"></div>
-                        <div class="ml-6">
-                            <h3 class="text-xl font-bold mb-2" data-translate="masterDegree">Master's in Software Engineering</h3>
-                            <p class="text-light-teal mb-1 flex items-center">
-                                <i class="fas fa-university mr-2"></i>
-                                <span data-translate="university">Instituto Superior de Engenharia do Porto (ISEP)</span>
-                            </p>
-                            <p class="text-accent-teal flex items-center">
-                                <i class="fas fa-clock mr-2"></i>
-                                <span data-translate="inProgress">In progress</span>
-                            </p>
-                        </div>
+                    <!-- Master's -->
+                    <div class="card timeline-item">
+                        <h3 class="text-xl font-display font-bold mb-2" data-translate="masterDegree">Master's in
+                            Software Engineering</h3>
+                        <p class="text-accent-cyan mb-1 flex items-center gap-2">
+                            <i class="fas fa-university"></i>
+                            <span data-translate="university">Instituto Superior de Engenharia do Porto (ISEP)</span>
+                        </p>
+                        <p class="text-accent-violet flex items-center gap-2 font-mono text-sm">
+                            <i class="fas fa-clock"></i>
+                            <span data-translate="inProgress">In progress</span>
+                        </p>
                     </div>
-                    <div class="bg-gray-800/50 backdrop-blur-sm p-8 rounded-2xl border border-gray-700/50 hover:border-light-teal/50 transition-all duration-300 relative overflow-hidden">
-                        <div class="absolute top-0 left-0 w-2 h-full bg-gradient-to-b from-light-teal to-accent-teal"></div>
-                        <div class="ml-6">
-                            <h3 class="text-xl font-bold mb-2" data-translate="bachelorDegree">Bachelor's in Computer Engineering</h3>
-                            <p class="text-light-teal mb-1 flex items-center">
-                                <i class="fas fa-university mr-2"></i>
-                                <span data-translate="university">Instituto Superior de Engenharia do Porto (ISEP)</span>
-                            </p>
-                            <p class="text-accent-teal flex items-center">
-                                <i class="fas fa-check-circle mr-2"></i>
-                                <span data-translate="completed">Completed</span>
-                            </p>
-                        </div>
+
+                    <!-- Bachelor's -->
+                    <div class="card timeline-item">
+                        <h3 class="text-xl font-display font-bold mb-2" data-translate="bachelorDegree">Bachelor's in
+                            Computer Engineering</h3>
+                        <p class="text-accent-cyan mb-1 flex items-center gap-2">
+                            <i class="fas fa-university"></i>
+                            <span data-translate="university">Instituto Superior de Engenharia do Porto (ISEP)</span>
+                        </p>
+                        <p class="text-green-400 flex items-center gap-2 font-mono text-sm">
+                            <i class="fas fa-check-circle"></i>
+                            <span data-translate="completed">Completed</span>
+                        </p>
                     </div>
                 </div>
             </section>
 
-            <section class="mb-20">
-                <h2 class="text-3xl font-bold text-light-teal mb-8 text-center" data-translate="howICanHelp">How I Can Help</h2>
-                <div class="max-w-4xl mx-auto bg-gray-800/50 backdrop-blur-sm p-8 rounded-2xl border border-gray-700/50 hover:border-light-teal/50 transition-all duration-300">
+            <!-- How I Can Help Section -->
+            <section class="animate-fade-in-up" style="opacity: 0;">
+                <h2 class="section-title" data-translate="howICanHelp">How I Can Help</h2>
+                <div class="max-w-4xl mx-auto">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div class="text-center">
-                            <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-light-teal to-accent-teal rounded-full mb-4">
-                                <i class="fas fa-laptop-code text-2xl text-white"></i>
+                        <!-- Personal Projects -->
+                        <div class="card service-card text-center">
+                            <div class="service-icon">
+                                <i class="fas fa-laptop-code"></i>
                             </div>
-                            <h3 class="text-xl font-bold mb-2 text-light-teal" data-translate="personalProjects">Personal Projects</h3>
-                            <p class="text-gray-300 leading-relaxed" data-translate="personalProjectsText">
-                                Looking to bring your personal project to life? I can help you build modern web applications, 
+                            <h3 class="text-xl font-display font-bold mb-3 text-accent-cyan"
+                                data-translate="personalProjects">Personal Projects</h3>
+                            <p class="text-slate-300 leading-relaxed" data-translate="personalProjectsText">
+                                Looking to bring your personal project to life? I can help you build modern web
+                                applications,
                                 from concept to deployment, using the latest technologies and best practices.
                             </p>
                         </div>
-                        <div class="text-center">
-                            <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-light-teal to-accent-teal rounded-full mb-4">
-                                <i class="fas fa-handshake text-2xl text-white"></i>
+
+                        <!-- Software Consulting -->
+                        <div class="card service-card text-center">
+                            <div class="service-icon" style="background: linear-gradient(135deg, #a78bfa, #f472b6);">
+                                <i class="fas fa-handshake"></i>
                             </div>
-                            <h3 class="text-xl font-bold mb-2 text-light-teal" data-translate="softwareConsulting">Software Consulting</h3>
-                            <p class="text-gray-300 leading-relaxed" data-translate="softwareConsultingText">
-                                Need technical guidance or code review? I offer software consulting services to help 
-                                optimize your existing projects, implement new features, or solve complex technical challenges.
+                            <h3 class="text-xl font-display font-bold mb-3 text-accent-violet"
+                                data-translate="softwareConsulting">Software Consulting</h3>
+                            <p class="text-slate-300 leading-relaxed" data-translate="softwareConsultingText">
+                                Need technical guidance or code review? I offer software consulting services to help
+                                optimize your existing projects, implement new features, or solve complex technical
+                                challenges.
                             </p>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <section class="mb-12">
-                <h2 class="text-3xl font-bold text-light-teal mb-8 text-center" data-translate="getInTouch">Get In Touch</h2>
+            <!-- Contact Section -->
+            <section class="mb-12 animate-fade-in-up" style="opacity: 0;">
+                <h2 class="section-title" data-translate="getInTouch">Get In Touch</h2>
                 <div class="max-w-2xl mx-auto">
                     <!-- Contact Form -->
-                    <form id="contactForm" class="bg-gray-800/50 backdrop-blur-sm p-8 rounded-2xl border border-gray-700/50 hover:border-light-teal/50 transition-all duration-300 mb-8">
+                    <form id="contactForm" class="card mb-10">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                             <div>
-                                <label for="firstName" class="block text-sm font-medium text-gray-300 mb-2" data-translate="firstName">First Name</label>
-                                <input type="text" id="firstName" name="firstName" required 
-                                       class="w-full px-4 py-3 bg-gray-900/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:border-light-teal focus:outline-none focus:ring-2 focus:ring-light-teal/50 transition-all duration-300">
+                                <label for="firstName" class="form-label" data-translate="firstName">First Name</label>
+                                <input type="text" id="firstName" name="firstName" required class="form-input">
                             </div>
                             <div>
-                                <label for="lastName" class="block text-sm font-medium text-gray-300 mb-2" data-translate="lastName">Last Name</label>
-                                <input type="text" id="lastName" name="lastName" required 
-                                       class="w-full px-4 py-3 bg-gray-900/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:border-light-teal focus:outline-none focus:ring-2 focus:ring-light-teal/50 transition-all duration-300">
+                                <label for="lastName" class="form-label" data-translate="lastName">Last Name</label>
+                                <input type="text" id="lastName" name="lastName" required class="form-input">
                             </div>
                         </div>
                         <div class="mb-6">
-                            <label for="email" class="block text-sm font-medium text-gray-300 mb-2" data-translate="emailAddress">Email Address</label>
-                            <input type="email" id="email" name="email" required 
-                                   class="w-full px-4 py-3 bg-gray-900/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:border-light-teal focus:outline-none focus:ring-2 focus:ring-light-teal/50 transition-all duration-300">
+                            <label for="email" class="form-label" data-translate="emailAddress">Email Address</label>
+                            <input type="email" id="email" name="email" required class="form-input">
                         </div>
                         <div class="mb-6">
-                            <label for="subject" class="block text-sm font-medium text-gray-300 mb-2" data-translate="subject">Subject</label>
-                            <select id="subject" name="subject" required 
-                                    class="w-full px-4 py-3 bg-gray-900/50 border border-gray-600 rounded-lg text-white focus:border-light-teal focus:outline-none focus:ring-2 focus:ring-light-teal/50 transition-all duration-300">
+                            <label for="subject" class="form-label" data-translate="subject">Subject</label>
+                            <select id="subject" name="subject" required class="form-input">
                                 <option value="" data-translate="selectSubject">Select a subject</option>
-                                <option value="Personal Project" data-translate="personalProject">Personal Project</option>
-                                <option value="Software Consulting" data-translate="softwareConsulting">Software Consulting</option>
+                                <option value="Personal Project" data-translate="personalProject">Personal Project
+                                </option>
+                                <option value="Software Consulting" data-translate="softwareConsulting">Software
+                                    Consulting</option>
                                 <option value="Job Opportunity" data-translate="jobOpportunity">Job Opportunity</option>
                                 <option value="General Inquiry" data-translate="generalInquiry">General Inquiry</option>
                             </select>
                         </div>
-                        <div class="mb-6">
-                            <label for="message" class="block text-sm font-medium text-gray-300 mb-2" data-translate="message">Message</label>
-                            <textarea id="message" name="message" rows="5" required 
-                                      class="w-full px-4 py-3 bg-gray-900/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:border-light-teal focus:outline-none focus:ring-2 focus:ring-light-teal/50 transition-all duration-300 resize-vertical" 
-                                      data-translate="messagePlaceholder"></textarea>
+                        <div class="mb-8">
+                            <label for="message" class="form-label" data-translate="message">Message</label>
+                            <textarea id="message" name="message" rows="5" required
+                                class="form-input resize-y min-h-[140px]"
+                                data-translate="messagePlaceholder"></textarea>
                         </div>
-                        <button type="submit" id="submitBtn" 
-                                class="w-full bg-gradient-to-r from-light-teal to-accent-teal text-white font-bold py-3 px-6 rounded-lg hover:from-dark-teal hover:to-light-teal transform hover:scale-105 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none">
+                        <button type="submit" id="submitBtn" class="form-button">
                             <span class="submit-text" data-translate="sendMessage">Send Message</span>
                             <span class="loading-text hidden" data-translate="sending">
                                 <i class="fas fa-spinner fa-spin mr-2"></i>Sending...
                             </span>
                         </button>
-                        
-                        <!-- Success/Error Messages -->
-                        <div id="statusMessage" class="mt-4 p-4 rounded-lg hidden">
-                            <div id="successMessage" class="hidden text-green-400">
-                                <i class="fas fa-check-circle mr-2"></i>
-                                <span data-translate="successMessage">Thank you! Your message has been sent successfully. I'll get back to you soon.</span>
+
+                        <!-- Status Messages -->
+                        <div id="statusMessage" class="mt-6 p-4 rounded-xl hidden">
+                            <div id="successMessage" class="hidden status-success flex items-center gap-2">
+                                <i class="fas fa-check-circle"></i>
+                                <span data-translate="successMessage">Thank you! Your message has been sent
+                                    successfully. I'll get back to you soon.</span>
                             </div>
-                            <div id="errorMessage" class="hidden text-red-400">
-                                <i class="fas fa-exclamation-circle mr-2"></i>
-                                <span data-translate="errorMessage">Sorry, there was an error sending your message. Please try again or contact me directly.</span>
+                            <div id="errorMessage" class="hidden status-error flex items-center gap-2">
+                                <i class="fas fa-exclamation-circle"></i>
+                                <span data-translate="errorMessage">Sorry, there was an error sending your message.
+                                    Please try again or contact me directly.</span>
                             </div>
                         </div>
                     </form>
 
                     <!-- Social Links -->
-                    <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-8">
-                        <a href="https://github.com/gustavocaiano" class="flex items-center text-white hover:text-accent-teal transition-all duration-300 group bg-gray-800/50 backdrop-blur-sm px-6 py-3 rounded-full border border-gray-700/50 hover:border-light-teal/50">
-                            <i class="fab fa-github text-xl mr-3 group-hover:scale-110 transition-transform"></i>
+                    <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                        <a href="https://github.com/gustavocaiano" class="social-button" target="_blank" rel="noopener">
+                            <i class="fab fa-github"></i>
                             <span data-translate="github">GitHub</span>
                         </a>
-                        <a href="mailto:gustavocaiano@outlook.com" class="flex items-center text-white hover:text-accent-teal transition-all duration-300 group bg-gray-800/50 backdrop-blur-sm px-6 py-3 rounded-full border border-gray-700/50 hover:border-light-teal/50">
-                            <i class="fas fa-envelope text-xl mr-3 group-hover:scale-110 transition-transform"></i>
+                        <a href="mailto:gustavocaiano@outlook.com" class="social-button">
+                            <i class="fas fa-envelope"></i>
                             <span data-translate="directEmail">Direct Email</span>
                         </a>
                     </div>
@@ -311,12 +382,16 @@
             </section>
         </main>
 
-        <footer class="mt-20 pt-10 border-t border-gray-700/50 text-center text-gray-400">
-            <p>&copy; <span class="copyright-year">2025</span> Gustavo Caiano. <span data-translate="footerRights">All rights reserved.</span></p>
-            <p class="mt-2 text-sm" data-translate="footerBuilt">Built with passion and modern web technologies</p>
+        <!-- Footer -->
+        <footer class="footer mt-24">
+            <p class="font-display">&copy; <span class="copyright-year">2025</span> Gustavo Caiano. <span
+                    data-translate="footerRights">All rights reserved.</span></p>
+            <p class="footer-built mt-2" data-translate="footerBuilt">Built with passion and modern web technologies</p>
         </footer>
     </div>
+
     <script src="translations.js"></script>
     <script src="script.js"></script>
 </body>
-</html> 
+
+</html>
