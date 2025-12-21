@@ -1,8 +1,8 @@
 // Language translations for the portfolio
 const translations = {
     en: {
-        title: "Gustavo Caiano | Computer Engineer",
-        subtitle: "Computer Engineer | Laravel Developer",
+        title: "Gustavo Caiano | Software Engineer",
+        subtitle: "Software Engineer | Laravel Developer",
         about: "About Me",
         aboutText: "Bachelor's degree in Computer Engineering from Instituto Superior de Engenharia do Porto (ISEP), currently completing a Master's degree in Software Engineering at the same institution. Developer focused on robust web applications and AI-based solutions, passionate about creating innovative digital experiences and solving complex technical challenges.",
         skills: "My Specialties",

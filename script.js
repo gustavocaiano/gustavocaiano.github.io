@@ -264,23 +264,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 errorMessage.querySelector('span').textContent = 'EmailJS is not configured yet. Please check the console for setup instructions.';
                 
                 // Log setup instructions
-                console.log(`
-🔧 EmailJS Setup Instructions:
-1. Go to https://www.emailjs.com/ and create account
-2. Set up email service (Gmail, Outlook, etc.)
-3. Create email template with variables: firstName, lastName, email, subject, message
-4. In EmailJS dashboard → Account → Security:
-   - Add allowed domain: gustavocaiano.github.io
-   - This prevents unauthorized use of your key
-5. Replace in EMAILJS_CONFIG object in script.js:
-   - YOUR_PUBLIC_KEY with your public key
-   - YOUR_SERVICE_ID with your service ID
-   - YOUR_TEMPLATE_ID with your template ID
-
-✅ Security: Public keys are safe in public repos when domain-restricted
-
-Form data for testing:
-`, templateParams);
                 
                 // Reset button state
                 submitBtn.disabled = false;
