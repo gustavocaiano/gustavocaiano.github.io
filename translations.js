@@ -41,7 +41,7 @@ const translations = {
         lastName: "Last Name",
         emailAddress: "Email Address",
         subject: "Subject",
-        selectSubject: "Select a subject",
+        selectSubject: "Select or type a subject",
         personalProject: "Personal Project",
         jobOpportunity: "Job Opportunity",
         generalInquiry: "General Inquiry",
@@ -53,6 +53,7 @@ const translations = {
         errorMessage: "Sorry, there was an error sending your message. Please try again or contact me directly.",
         github: "GitHub",
         directEmail: "Direct Email",
+        contactMe: "Contact Me",
         footerRights: "All rights reserved.",
         footerBuilt: "Built with passion and modern web technologies"
     },
@@ -97,7 +98,7 @@ const translations = {
         lastName: "Último Nome",
         emailAddress: "Endereço de Email",
         subject: "Assunto",
-        selectSubject: "Selecione um assunto",
+        selectSubject: "Selecione ou escreva um assunto",
         personalProject: "Projeto Pessoal",
         jobOpportunity: "Oportunidade de Emprego",
         generalInquiry: "Consulta Geral",
@@ -109,6 +110,7 @@ const translations = {
         errorMessage: "Desculpe, houve um erro ao enviar a sua mensagem. Tente novamente ou contacte-me diretamente.",
         github: "GitHub",
         directEmail: "Email Direto",
+        contactMe: "Contactar",
         footerRights: "Todos os direitos reservados.",
         footerBuilt: "Construído com paixão e tecnologias web modernas"
     }
@@ -150,6 +152,26 @@ function updatePageContent() {
             }
         }
     });
+
+    // Update subject datalist options
+    const datalist = document.getElementById('subjects');
+    if (datalist) {
+        const subjects = [
+            t.personalProject,
+            t.softwareConsulting,
+            t.jobOpportunity,
+            t.generalInquiry
+        ];
+        
+        datalist.innerHTML = '';
+        subjects.forEach(subject => {
+            if (subject) {
+                const option = document.createElement('option');
+                option.value = subject;
+                datalist.appendChild(option);
+            }
+        });
+    }
 }
 
 // Function to update language selector

@@ -61,6 +61,41 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(section);
     });
 
+    // Sticky Contact Button Logic
+    const stickyBtn = document.getElementById('stickyContactBtn');
+    const contactSection = document.getElementById('contactSection');
+    
+    if (stickyBtn && contactSection) {
+        const contactObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Hide button when contact section is in view
+                    stickyBtn.classList.remove('visible');
+                } else {
+                    // Show button when scrolled past header but not at contact section
+                    if (window.scrollY > 300) {
+                        stickyBtn.classList.add('visible');
+                    }
+                }
+            });
+        }, { threshold: 0.1 });
+
+        contactObserver.observe(contactSection);
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300 && !contactSection.getBoundingClientRect().top < window.innerHeight) {
+                const rect = contactSection.getBoundingClientRect();
+                if (rect.top > window.innerHeight) {
+                    stickyBtn.classList.add('visible');
+                } else {
+                    stickyBtn.classList.remove('visible');
+                }
+            } else if (window.scrollY <= 300) {
+                stickyBtn.classList.remove('visible');
+            }
+        });
+    }
+
     // Smooth scrolling for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {

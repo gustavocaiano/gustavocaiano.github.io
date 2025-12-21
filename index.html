@@ -93,7 +93,8 @@
             </div>
 
             <!-- Language Selector -->
-            <div class="mt-8">
+            <div class="mt-8 flex flex-col items-center gap-4">
+                <a href="#contactSection" class="hero-contact-btn" data-translate="contactMe">Contact Me</a>
                 <select id="languageSelector" onchange="setLanguage(this.value)" class="language-select">
                     <option value="en">🇺🇸 English</option>
                     <option value="pt">🇵🇹 Português</option>
@@ -308,7 +309,7 @@
             </section>
 
             <!-- Contact Section -->
-            <section class="mb-12 animate-fade-in-up" style="opacity: 0;">
+            <section id="contactSection" class="mb-12 animate-fade-in-up" style="opacity: 0;">
                 <h2 class="section-title" data-translate="getInTouch">Get In Touch</h2>
                 <div class="max-w-2xl mx-auto">
                     <!-- Contact Form -->
@@ -329,15 +330,11 @@
                         </div>
                         <div class="mb-6">
                             <label for="subject" class="form-label" data-translate="subject">Subject</label>
-                            <select id="subject" name="subject" required class="form-input">
-                                <option value="" data-translate="selectSubject">Select a subject</option>
-                                <option value="Personal Project" data-translate="personalProject">Personal Project
-                                </option>
-                                <option value="Software Consulting" data-translate="softwareConsulting">Software
-                                    Consulting</option>
-                                <option value="Job Opportunity" data-translate="jobOpportunity">Job Opportunity</option>
-                                <option value="General Inquiry" data-translate="generalInquiry">General Inquiry</option>
-                            </select>
+                            <input list="subjects" id="subject" name="subject" required class="form-input" 
+                                data-translate="selectSubject" placeholder="Select or type a subject">
+                            <datalist id="subjects">
+                                <!-- Options will be populated by JS -->
+                            </datalist>
                         </div>
                         <div class="mb-8">
                             <label for="message" class="form-label" data-translate="message">Message</label>
@@ -389,6 +386,11 @@
             <p class="footer-built mt-2" data-translate="footerBuilt">Built with passion and modern web technologies</p>
         </footer>
     </div>
+
+    <!-- Sticky Contact Button -->
+    <a href="#contactSection" id="stickyContactBtn" class="sticky-contact-btn" data-translate="contactMe">
+        Contact Me
+    </a>
 
     <script src="translations.js"></script>
     <script src="script.js"></script>
