@@ -8,9 +8,9 @@
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml"
-        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' style='stop-color:%2322d3ee;stop-opacity:1' /><stop offset='100%25' style='stop-color:%23a78bfa;stop-opacity:1' /></linearGradient></defs><rect width='100' height='100' rx='20' fill='url(%23grad)'/><text x='50' y='65' font-family='system-ui,-apple-system,sans-serif' font-size='36' font-weight='bold' text-anchor='middle' fill='white'>GC</text></svg>">
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' style='stop-color:%237FD0FF;stop-opacity:1' /><stop offset='100%25' style='stop-color:%234AA8E8;stop-opacity:1' /></linearGradient></defs><rect width='100' height='100' rx='20' fill='url(%23grad)'/><text x='50' y='65' font-family='system-ui,-apple-system,sans-serif' font-size='36' font-weight='bold' text-anchor='middle' fill='white'>GC</text></svg>">
     <link rel="apple-touch-icon"
-        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' style='stop-color:%2322d3ee;stop-opacity:1' /><stop offset='100%25' style='stop-color:%23a78bfa;stop-opacity:1' /></linearGradient></defs><rect width='100' height='100' rx='20' fill='url(%23grad)'/><text x='50' y='65' font-family='system-ui,-apple-system,sans-serif' font-size='36' font-weight='bold' text-anchor='middle' fill='white'>GC</text></svg>">
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' style='stop-color:%237FD0FF;stop-opacity:1' /><stop offset='100%25' style='stop-color:%234AA8E8;stop-opacity:1' /></linearGradient></defs><rect width='100' height='100' rx='20' fill='url(%23grad)'/><text x='50' y='65' font-family='system-ui,-apple-system,sans-serif' font-size='36' font-weight='bold' text-anchor='middle' fill='white'>GC</text></svg>">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -22,17 +22,19 @@
                         'mono': ['JetBrains Mono', 'monospace'],
                     },
                     colors: {
-                        'accent-cyan': '#22d3ee',
-                        'accent-violet': '#a78bfa',
-                        'accent-pink': '#f472b6',
-                        'dark-primary': '#0a0f1a',
-                        'dark-secondary': '#111827',
+                        'accent-cyan': '#7FD0FF',
+                        'accent-violet': '#4AA8E8',
+                        'accent-ice': '#A7E4FF',
+                        'dark-primary': '#05070A',
+                        'dark-secondary': '#060C14',
+                        'surface': '#08111B',
+                        'surface-2': '#0F1924',
                     },
                 }
             }
         }
     </script>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=20260303-1">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <!-- EmailJS -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
@@ -40,6 +42,7 @@
 
 <body class="min-h-screen opacity-0 transition-opacity duration-1000">
     <!-- Atmospheric background layers -->
+    <canvas id="starfield" class="starfield" aria-hidden="true"></canvas>
     <div class="mesh-gradient"></div>
     <div class="noise-overlay"></div>
     <div class="grid-pattern"></div>
@@ -55,7 +58,7 @@
             style="animation: float 8s ease-in-out infinite;"></div>
         <div class="particle particle-down absolute top-3/4 right-1/4 w-1 h-1 bg-accent-violet rounded-full opacity-50"
             style="animation: float 10s ease-in-out infinite 1s;"></div>
-        <div class="particle particle-up absolute top-1/2 left-3/4 w-1 h-1 bg-accent-pink rounded-full opacity-40"
+        <div class="particle particle-up absolute top-1/2 left-3/4 w-1 h-1 bg-accent-ice rounded-full opacity-40"
             style="animation: float 12s ease-in-out infinite 2s;"></div>
         <div class="particle particle-up absolute top-2/3 left-8 w-0.5 h-0.5 bg-accent-cyan rounded-full opacity-50"
             style="animation: float 9s ease-in-out infinite 2.5s;"></div>
@@ -72,7 +75,7 @@
                 <div class="profile-ring">
                     <div class="relative rounded-full overflow-hidden w-44 h-44 md:w-52 md:h-52">
                         <img src="img/cv5_cropped.png" alt="Gustavo Caiano"
-                            class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                            class="w-full h-full object-cover transition-transform duration-500 hover:scale-110 profile-image">
                     </div>
                 </div>
             </div>
@@ -94,7 +97,8 @@
 
             <!-- Language Selector -->
             <div class="mt-8 flex flex-col items-center gap-4">
-                <a href="#contactSection" class="hero-contact-btn" data-translate="contactMe">Contact Me</a>
+                <a href="#contactSection" class="hero-contact-btn themed-link themed-link-button is-internal"
+                    data-translate="contactMe">Contact Me</a>
                 <select id="languageSelector" onchange="setLanguage(this.value)" class="language-select">
                     <option value="en">🇺🇸 English</option>
                     <option value="pt">🇵🇹 Português</option>
@@ -217,7 +221,7 @@
                                 <p class="text-accent-cyan mb-2 flex items-center gap-2 flex-wrap">
                                     <i class="fas fa-building"></i>
                                     <a href="https://novaforensic.com" target="_blank"
-                                        class="hover:text-accent-violet transition-colors"
+                                        class="themed-link themed-link-inline is-external"
                                         data-translate="jobCompany">NovaForensic</a>
                                     <span class="text-slate-400 font-mono text-sm">| <span
                                             data-translate="jobType">Digital Forensics Company</span></span>
@@ -264,7 +268,7 @@
                             <i class="fas fa-university"></i>
                             <span data-translate="university">Instituto Superior de Engenharia do Porto (ISEP)</span>
                         </p>
-                        <p class="text-green-400 flex items-center gap-2 font-mono text-sm">
+                        <p class="text-accent-violet flex items-center gap-2 font-mono text-sm">
                             <i class="fas fa-check-circle"></i>
                             <span data-translate="completed">Completed</span>
                         </p>
@@ -293,7 +297,7 @@
 
                         <!-- Software Consulting -->
                         <div class="card service-card text-center">
-                            <div class="service-icon" style="background: linear-gradient(135deg, #a78bfa, #f472b6);">
+                            <div class="service-icon">
                                 <i class="fas fa-handshake"></i>
                             </div>
                             <h3 class="text-xl font-display font-bold mb-3 text-accent-violet"
@@ -322,27 +326,27 @@
                         </summary>
                         <div class="projects-showcase-grid">
                             <a href="https://www.tubeshuffle.online/" target="_blank" rel="noopener"
-                                class="projects-showcase-item">
+                                class="projects-showcase-item themed-link themed-link-card is-external">
                                 <span class="projects-showcase-name">TubeShuffle</span>
                                 <span class="projects-showcase-type" data-translate="liveDemo">Live Demo</span>
                             </a>
                             <a href="https://github.com/gustavocaiano/hcounter" target="_blank" rel="noopener"
-                                class="projects-showcase-item">
+                                class="projects-showcase-item themed-link themed-link-card is-external">
                                 <span class="projects-showcase-name">hcounter</span>
                                 <span class="projects-showcase-type" data-translate="github">GitHub</span>
                             </a>
                             <a href="https://github.com/gustavocaiano/snapper" target="_blank" rel="noopener"
-                                class="projects-showcase-item">
+                                class="projects-showcase-item themed-link themed-link-card is-external">
                                 <span class="projects-showcase-name">snapper</span>
                                 <span class="projects-showcase-type" data-translate="github">GitHub</span>
                             </a>
                             <a href="https://github.com/gustavocaiano/yt-loop-extension" target="_blank"
-                                rel="noopener" class="projects-showcase-item">
+                                rel="noopener" class="projects-showcase-item themed-link themed-link-card is-external">
                                 <span class="projects-showcase-name">yt-loop-extension</span>
                                 <span class="projects-showcase-type" data-translate="github">GitHub</span>
                             </a>
                             <a href="https://github.com/gustavocaiano/news-command" target="_blank" rel="noopener"
-                                class="projects-showcase-item">
+                                class="projects-showcase-item themed-link themed-link-card is-external">
                                 <span class="projects-showcase-name">news-command</span>
                                 <span class="projects-showcase-type" data-translate="github">GitHub</span>
                             </a>
@@ -409,11 +413,11 @@
 
                     <!-- Social Links -->
                     <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
-                        <a href="https://github.com/gustavocaiano" class="social-button" target="_blank" rel="noopener">
+                        <a href="https://github.com/gustavocaiano" class="social-button themed-link themed-link-button is-external" target="_blank" rel="noopener">
                             <i class="fab fa-github"></i>
                             <span data-translate="github">GitHub</span>
                         </a>
-                        <a href="mailto:gustavocaiano@outlook.com" class="social-button">
+                        <a href="mailto:gustavocaiano@outlook.com" class="social-button themed-link themed-link-button is-external">
                             <i class="fas fa-envelope"></i>
                             <span data-translate="directEmail">Direct Email</span>
                         </a>
@@ -431,12 +435,13 @@
     </div>
 
     <!-- Sticky Contact Button -->
-    <a href="#contactSection" id="stickyContactBtn" class="sticky-contact-btn" data-translate="contactMe">
+    <a href="#contactSection" id="stickyContactBtn"
+        class="sticky-contact-btn themed-link themed-link-button is-internal" data-translate="contactMe">
         Contact Me
     </a>
 
-    <script src="translations.js"></script>
-    <script src="script.js"></script>
+    <script src="translations.js?v=20260303-1"></script>
+    <script src="script.js?v=20260303-1"></script>
 </body>
 
 </html>

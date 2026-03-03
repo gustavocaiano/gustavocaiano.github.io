@@ -24,6 +24,100 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Initialize language system
     initializeLanguage();
+
+    // Ensure project links keep visual classes in production caches
+    const projectLinks = document.querySelectorAll('.projects-showcase-grid a');
+    projectLinks.forEach(link => {
+        link.classList.add('projects-showcase-item', 'themed-link', 'themed-link-card', 'is-external');
+        if (link.target === '_blank') {
+            link.rel = 'noopener noreferrer';
+        }
+    });
+
+    // Subtle starfield background with no dependency
+    const starfieldCanvas = document.getElementById('starfield');
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (starfieldCanvas) {
+        const context = starfieldCanvas.getContext('2d');
+        if (context) {
+            const stars = [];
+            let animationFrameId;
+            let width = 0;
+            let height = 0;
+            let pixelRatio = 1;
+
+            const random = (min, max) => Math.random() * (max - min) + min;
+
+            const resetStar = (star) => {
+                star.x = random(0, width);
+                star.y = random(0, height);
+                star.radius = random(0.5, 1.6);
+                star.alpha = random(0.22, 0.78);
+                star.velocity = random(0.02, 0.08);
+                star.phase = random(0, Math.PI * 2);
+            };
+
+            const populateStars = () => {
+                stars.length = 0;
+                const starCount = Math.min(180, Math.max(70, Math.floor((width * height) / 14500)));
+
+                for (let index = 0; index < starCount; index += 1) {
+                    const star = {};
+                    resetStar(star);
+                    stars.push(star);
+                }
+            };
+
+            const resizeStarfield = () => {
+                pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+                width = window.innerWidth;
+                height = window.innerHeight;
+
+                starfieldCanvas.width = Math.floor(width * pixelRatio);
+                starfieldCanvas.height = Math.floor(height * pixelRatio);
+                starfieldCanvas.style.width = `${width}px`;
+                starfieldCanvas.style.height = `${height}px`;
+                context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+
+                populateStars();
+            };
+
+            const drawStarfield = (time = 0) => {
+                context.clearRect(0, 0, width, height);
+
+                stars.forEach(star => {
+                    if (!prefersReducedMotion) {
+                        star.y += star.velocity;
+                        if (star.y > height + 2) {
+                            star.y = -2;
+                            star.x = random(0, width);
+                        }
+                    }
+
+                    const pulse = 0.68 + Math.sin(time * 0.0007 + star.phase) * 0.2;
+                    const alpha = Math.max(0.12, Math.min(0.88, star.alpha * pulse));
+                    context.beginPath();
+                    context.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+                    context.fillStyle = `rgba(127, 208, 255, ${alpha.toFixed(3)})`;
+                    context.fill();
+                });
+
+                if (!prefersReducedMotion) {
+                    animationFrameId = requestAnimationFrame(drawStarfield);
+                }
+            };
+
+            resizeStarfield();
+            drawStarfield();
+
+            window.addEventListener('resize', () => {
+                cancelAnimationFrame(animationFrameId);
+                resizeStarfield();
+                drawStarfield();
+            });
+        }
+    }
     
     // Add current year to footer copyright
     const yearElement = document.querySelector('.copyright-year');
@@ -83,16 +177,14 @@ document.addEventListener('DOMContentLoaded', () => {
         contactObserver.observe(contactSection);
 
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 300 && !contactSection.getBoundingClientRect().top < window.innerHeight) {
-                const rect = contactSection.getBoundingClientRect();
-                if (rect.top > window.innerHeight) {
-                    stickyBtn.classList.add('visible');
-                } else {
-                    stickyBtn.classList.remove('visible');
-                }
-            } else if (window.scrollY <= 300) {
+            if (window.scrollY <= 300) {
                 stickyBtn.classList.remove('visible');
+                return;
             }
+
+            const rect = contactSection.getBoundingClientRect();
+            const contactIsVisible = rect.top < window.innerHeight && rect.bottom > 0;
+            stickyBtn.classList.toggle('visible', !contactIsVisible);
         });
     }
 
@@ -110,11 +202,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Enhanced hover effects for contact buttons
+    // Subtle hover effects for contact buttons
     const contactButtons = document.querySelectorAll('.social-button, a[href^="mailto:"]');
     contactButtons.forEach(button => {
         button.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-2px) scale(1.05)';
+            this.style.transform = 'translateY(-2px) scale(1.02)';
         });
         
         button.addEventListener('mouseleave', function() {
@@ -123,41 +215,22 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Enhanced parallax effect for background particles
-    window.addEventListener('scroll', () => {
-        const scrolled = window.pageYOffset;
-        const particlesDown = document.querySelectorAll('.particle-down');
-        const particlesUp = document.querySelectorAll('.particle-up');
-        
-        // Original particles move down with scroll
-        particlesDown.forEach((particle, index) => {
-            const speed = 0.3 + (index * 0.15);
-            particle.style.transform = `translateY(${scrolled * speed}px)`;
-        });
-        
-        // New side particles move up with scroll (negative direction)
-        particlesUp.forEach((particle, index) => {
-            const speed = 0.4 + (index * 0.1);
-            particle.style.transform = `translateY(${scrolled * -speed}px)`;
-        });
-    });
+    if (!prefersReducedMotion) {
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const particlesDown = document.querySelectorAll('.particle-down');
+            const particlesUp = document.querySelectorAll('.particle-up');
 
-    // Add typing effect to the main title (optional enhancement)
-    const title = document.querySelector('h1');
-    if (title) {
-        const originalText = title.textContent;
-        title.textContent = '';
-        let i = 0;
-        
-        const typeWriter = () => {
-            if (i < originalText.length) {
-                title.textContent += originalText.charAt(i);
-                i++;
-                setTimeout(typeWriter, 100);
-            }
-        };
-        
-        // Start typing effect after a short delay
-        setTimeout(typeWriter, 1000);
+            particlesDown.forEach((particle, index) => {
+                const speed = 0.12 + (index * 0.08);
+                particle.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+
+            particlesUp.forEach((particle, index) => {
+                const speed = 0.14 + (index * 0.06);
+                particle.style.transform = `translateY(${scrolled * -speed}px)`;
+            });
+        });
     }
 
     // Add click ripple effect to buttons
@@ -184,27 +257,6 @@ document.addEventListener('DOMContentLoaded', () => {
     contactButtons.forEach(button => {
         button.addEventListener('click', createRipple);
     });
-
-    // Add CSS for ripple effect
-    const style = document.createElement('style');
-    style.textContent = `
-        .ripple {
-            position: absolute;
-            border-radius: 50%;
-            background-color: rgba(94, 234, 212, 0.6);
-            transform: scale(0);
-            animation: ripple-animation 0.6s linear;
-            pointer-events: none;
-        }
-        
-        @keyframes ripple-animation {
-            to {
-                transform: scale(4);
-                opacity: 0;
-            }
-        }
-    `;
-    document.head.appendChild(style);
 
     // Performance optimization: Throttle scroll events
     let ticking = false;
