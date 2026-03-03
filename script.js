@@ -111,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Enhanced hover effects for contact buttons
-    const contactButtons = document.querySelectorAll('a[href^="mailto:"], a[href^="https://github.com"]');
+    const contactButtons = document.querySelectorAll('.social-button, a[href^="mailto:"]');
     contactButtons.forEach(button => {
         button.addEventListener('mouseenter', function() {
             this.style.transform = 'translateY(-2px) scale(1.05)';
