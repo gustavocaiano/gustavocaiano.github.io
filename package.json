@@ -1,0 +1,42 @@
+{
+  "name": "gustavocaiano.github.io",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Gustavo Caiano's personal website",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "dev:wave": "vite --open /wave-demo.html",
+    "build": "vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gustavocaiano/gustavocaiano.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gustavocaiano/gustavocaiano.github.io/issues"
+  },
+  "homepage": "https://github.com/gustavocaiano/gustavocaiano.github.io#readme",
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "simplex-noise": "^4.0.3",
+    "tailwind-merge": "^3.5.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.2.2",
+    "@types/node": "^25.5.0",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.1",
+    "tailwindcss": "^4.2.2",
+    "typescript": "^5.9.3",
+    "vite": "^8.0.1"
+  }
+}

@@ -45,7 +45,10 @@
     <canvas id="starfield" class="starfield" aria-hidden="true"></canvas>
     <div class="mesh-gradient"></div>
     <div class="noise-overlay"></div>
-    <div class="grid-pattern"></div>
+    <div class="wave-background" id="waveBackground" aria-hidden="true">
+        <svg id="waveBackgroundSvg" class="wave-background__svg" xmlns="http://www.w3.org/2000/svg"></svg>
+        <div class="wave-background__pointer"></div>
+    </div>
 
     <!-- Floating orbs -->
     <div class="orb orb-1"></div>
@@ -86,7 +89,7 @@
             </h1>
 
             <!-- Subtitle -->
-            <p class="subtitle text-center mb-6" data-translate="subtitle">Laravel Full-Stack Engineer | AI-Assisted, Human-Verified Delivery</p>
+            <p class="subtitle text-center mb-6" data-translate="subtitle">Laravel Full-Stack Engineer | Web Applications and Service Integrations</p>
 
             <!-- Decorative divider -->
             <div class="divider mt-2">
@@ -109,18 +112,13 @@
         <main class="space-y-24">
             <!-- About Section -->
             <section class="animate-fade-in-up stagger-1" style="opacity: 0;">
-                <h2 class="section-title" data-translate="about">About &amp; Delivery Approach</h2>
+                <h2 class="section-title" data-translate="about">About Me</h2>
                 <div class="max-w-4xl mx-auto card">
                     <p class="text-lg leading-relaxed text-slate-300 font-display" data-translate="aboutText">
                         Bachelor's degree in Computer Engineering from Instituto Superior de Engenharia do Porto (ISEP),
                         currently completing a Master's degree in Software Engineering at the same institution.
-                        Laravel-focused full-stack engineer building robust web applications with AI-assisted workflows
-                        and careful human verification.
+                        Laravel-focused full-stack engineer building robust web applications.
                     </p>
-                </div>
-                <div class="max-w-4xl mx-auto mt-6 card">
-                    <h3 class="text-lg font-display font-bold mb-3 text-accent-cyan" data-translate="workingStyleTitle">Working Style</h3>
-                    <p class="text-slate-300 leading-relaxed" data-translate="workingStyleText">AI-assisted implementation with human verification, pragmatic trade-offs, and clear communication from scope to release.</p>
                 </div>
             </section>
 
@@ -154,14 +152,13 @@
                         </div>
                     </div>
 
-                    <!-- AI & Data -->
+                    <!-- AI Automation & Integration -->
                     <div class="card skill-card opacity-0 translate-y-4 transition-all duration-500">
                         <div class="skill-icon">
                             <i class="fas fa-brain"></i>
                         </div>
-                        <h3 class="skill-title" data-translate="skillAI">AI & Data Analysis</h3>
-                        <p class="skill-text" data-translate="skillAIText">Automatic Transcription, NLP, AI Models, Data
-                            Analysis, European R&D Projects</p>
+                        <h3 class="skill-title" data-translate="skillAI">AI Automation &amp; Integration</h3>
+                        <p class="skill-text" data-translate="skillAIText">Experience with AI automation in company workflows and integrating AI capabilities into services.</p>
                         <div class="skill-bar">
                             <div class="skill-bar-fill"></div>
                         </div>
@@ -210,7 +207,7 @@
 
             <!-- Work Experience Section -->
             <section class="animate-fade-in-up stagger-3" style="opacity: 0;">
-                <h2 class="section-title" data-translate="workExperience">Delivery Experience</h2>
+                <h2 class="section-title" data-translate="workExperience">Professional Experience</h2>
                 <div class="max-w-4xl mx-auto">
                     <div class="card experience-card">
                         <div class="experience-badge">
@@ -235,8 +232,7 @@
                                     <span data-translate="jobDate">February 2024 - Present</span>
                                 </p>
                                 <p class="text-slate-300 leading-relaxed" data-translate="jobDescription">Working
-                                    as a developer at NovaForensic, building and maintaining digital forensics software
-                                    with a practical engineering process focused on reliability and validation.</p>
+                                    as a developer at NovaForensic, building and maintaining digital forensics software.</p>
                             </div>
                             <div class="text-accent-cyan/20 text-6xl">
                                 <i class="fas fa-search"></i>
@@ -293,9 +289,8 @@
                             <h3 class="text-xl font-display font-bold mb-3 text-accent-cyan"
                                 data-translate="personalProjects">Personal Projects</h3>
                             <p class="text-slate-300 leading-relaxed" data-translate="personalProjectsText">
-                                Looking to bring your personal project to life? I can help you build modern web
-                                applications,
-                                from concept to deployment, using the latest technologies and best practices.
+                                Need to launch a Laravel full-stack product? I can help from architecture through
+                                deployment with a practical, maintainable approach.
                             </p>
                         </div>
 
@@ -307,9 +302,8 @@
                             <h3 class="text-xl font-display font-bold mb-3 text-accent-violet"
                                 data-translate="softwareConsulting">Software Consulting</h3>
                             <p class="text-slate-300 leading-relaxed" data-translate="softwareConsultingText">
-                                Need technical guidance or code review? I offer software consulting services to help
-                                optimize your existing projects, implement new features, or solve complex technical
-                                challenges.
+                                Need practical Laravel guidance or code review? I provide focused consulting to improve
+                                architecture, implement features safely, and solve technical challenges.
                             </p>
                         </div>
                     </div>
@@ -321,7 +315,7 @@
                 <h2 class="section-title" data-translate="projectsShowcase">Projects & Public Solutions</h2>
                 <div class="max-w-5xl mx-auto card projects-showcase-card">
                     <p class="projects-showcase-intro" data-translate="projectsShowcaseIntro">
-                        A quick list of public repositories and live products that reflect full-stack Laravel delivery.
+                        A quick list of public repositories and live products that reflect my Laravel full-stack work.
                     </p>
                     <details class="projects-collapse" open>
                         <summary>
@@ -446,6 +440,7 @@
 
     <script src="translations.js?v=20260303-1"></script>
     <script src="script.js?v=20260303-1"></script>
+    <script type="module" src="wave-background.js?v=20260320-1"></script>
 </body>
 
 </html>
