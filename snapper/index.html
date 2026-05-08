@@ -87,9 +87,9 @@
                     windows without turning your desktop into a puzzle.
                 </p>
                 <div class="snapper-actions" aria-label="Primary actions">
-                    <a class="snapper-button snapper-button--primary" href="https://github.com/gustavocaiano/snapper/releases/latest/download/Snapper.dmg">
+                    <a id="snapperDownloadButton" class="snapper-button snapper-button--primary" href="https://github.com/gustavocaiano/snapper/releases/latest">
                         <i class="fa-brands fa-apple" aria-hidden="true"></i>
-                        Download DMG
+                        <span id="snapperDownloadLabel">Download latest DMG</span>
                     </a>
                     <a class="snapper-button snapper-button--ghost" href="https://github.com/gustavocaiano/snapper"
                         target="_blank" rel="noopener noreferrer">
@@ -98,6 +98,7 @@
                     </a>
                 </div>
                 <p class="snapper-disclaimer">
+                    <span id="snapperDownloadVersion">Versioned DMG assets are published on GitHub Releases.</span><br>
                     Free local build · ad-hoc signed · not Developer ID notarized yet
                 </p>
             </div>
@@ -187,7 +188,7 @@
             </div>
             <div class="snapper-install-card">
                 <ol>
-                    <li><strong>Open</strong> <code>Snapper.dmg</code></li>
+                    <li><strong>Open</strong> the downloaded <code>Snapper_vx_x_x.dmg</code></li>
                     <li><strong>Drag</strong> Snapper.app to Applications</li>
                     <li><strong>Launch</strong> from <code>/Applications</code></li>
                     <li><strong>Allow</strong> Accessibility permission</li>
@@ -215,6 +216,49 @@ cd snapper
         <p>Built by <a href="/">Gustavo Caiano</a>. Snapper is open source and native to macOS.</p>
     </footer>
 
+    <script>
+        (() => {
+            const button = document.getElementById('snapperDownloadButton')
+            const label = document.getElementById('snapperDownloadLabel')
+            const version = document.getElementById('snapperDownloadVersion')
+            const fallbackUrl = 'https://github.com/gustavocaiano/snapper/releases/latest'
+
+            if (!button || !label || !version) {
+                return
+            }
+
+            fetch('https://api.github.com/repos/gustavocaiano/snapper/releases/latest', {
+                headers: { Accept: 'application/vnd.github+json' },
+            })
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error('Latest release unavailable')
+                    }
+                    return response.json()
+                })
+                .then((release) => {
+                    const assets = Array.isArray(release.assets) ? release.assets : []
+                    const dmg = assets.find((asset) => /^Snapper_v.+\.dmg$/i.test(asset.name))
+                        || assets.find((asset) => /\.dmg$/i.test(asset.name))
+
+                    if (!dmg?.browser_download_url) {
+                        button.href = release.html_url || fallbackUrl
+                        label.textContent = 'View latest release'
+                        version.textContent = 'Open GitHub Releases to choose the newest DMG.'
+                        return
+                    }
+
+                    button.href = dmg.browser_download_url
+                    label.textContent = `Download ${release.tag_name || 'latest'} DMG`
+                    version.textContent = `Latest asset: ${dmg.name}`
+                })
+                .catch(() => {
+                    button.href = fallbackUrl
+                    label.textContent = 'View latest release'
+                    version.textContent = 'Open GitHub Releases to choose the newest versioned DMG.'
+                })
+        })()
+    </script>
     <script src="../translations.js?v=20260303-1"></script>
     <script src="../script.js?v=20260303-1"></script>
     <script type="module" src="../wave-background.js?v=20260320-1"></script>
