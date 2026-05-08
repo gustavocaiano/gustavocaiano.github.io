@@ -11,7 +11,9 @@ export default defineConfig({
   build: {
     rollupOptions: {
       input: {
+        main: path.resolve(__dirname, "index.html"),
         waveDemo: path.resolve(__dirname, "wave-demo.html"),
+        snapper: path.resolve(__dirname, "snapper/index.html"),
       },
     },
   },

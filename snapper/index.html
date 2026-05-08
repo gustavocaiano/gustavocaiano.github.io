@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snapper for macOS | Custom Window Snapping</title>
+    <meta name="description"
+        content="Snapper is a free native macOS menu bar app for custom snap zones, global shortcuts, and fast window arrangement.">
+    <link rel="canonical" href="https://gustavocaiano.github.io/snapper/">
+
+    <meta property="og:title" content="Snapper for macOS">
+    <meta property="og:description"
+        content="Native macOS window snapping with custom zones, global shortcuts, and a free DMG distribution path.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://gustavocaiano.github.io/snapper/">
+    <meta property="og:image" content="https://gustavocaiano.github.io/img/snapper-logo.svg">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Snapper for macOS">
+    <meta name="twitter:description" content="Native macOS window snapping with custom zones and global shortcuts.">
+
+    <link rel="icon" type="image/svg+xml" href="../img/snapper-logo.svg">
+    <link rel="apple-touch-icon" href="../img/snapper-logo.svg">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        display: ['Outfit', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        'accent-cyan': '#7FD0FF',
+                        'accent-violet': '#4AA8E8',
+                        'accent-ice': '#A7E4FF',
+                        'dark-primary': '#05070A',
+                        'dark-secondary': '#060C14',
+                        surface: '#08111B',
+                        'surface-2': '#0F1924',
+                    },
+                },
+            },
+        }
+    </script>
+    <link rel="stylesheet" href="../styles.css?v=20260303-1">
+    <link rel="stylesheet" href="../css/snapper.css?v=20260508-1">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body class="snapper-page min-h-screen text-gray-200 font-display antialiased">
+    <a href="#main" class="snapper-skip">Skip to content</a>
+
+    <canvas id="starfield" class="starfield" aria-hidden="true"></canvas>
+    <div class="mesh-gradient"></div>
+    <div class="noise-overlay"></div>
+    <div class="wave-background" id="waveBackground" aria-hidden="true">
+        <svg id="waveBackgroundSvg" class="wave-background__svg" xmlns="http://www.w3.org/2000/svg"></svg>
+        <div class="wave-background__pointer"></div>
+    </div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
+    <nav class="snapper-nav" aria-label="Snapper navigation">
+        <a href="/" class="snapper-nav__back" aria-label="Back to Gustavo Caiano homepage">
+            <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+            <span>Gustavo Caiano</span>
+        </a>
+        <div class="snapper-nav__links">
+            <a href="#install">Install</a>
+            <a href="#trust">Trust</a>
+            <a href="https://github.com/gustavocaiano/snapper" target="_blank" rel="noopener noreferrer">
+                GitHub <i class="fa-brands fa-github" aria-hidden="true"></i>
+            </a>
+        </div>
+    </nav>
+
+    <main id="main" class="snapper-main">
+        <section class="snapper-hero" aria-labelledby="hero-title">
+            <div class="snapper-hero__copy">
+                <p class="snapper-eyebrow">Native macOS menu bar app</p>
+                <h1 id="hero-title">Window snapping that feels like it belongs on your Mac.</h1>
+                <p class="snapper-hero__lede">
+                    Snapper gives you custom snap zones, fast keyboard control, and a clean on-screen editor for arranging
+                    windows without turning your desktop into a puzzle.
+                </p>
+                <div class="snapper-actions" aria-label="Primary actions">
+                    <a class="snapper-button snapper-button--primary" href="https://github.com/gustavocaiano/snapper/releases/latest/download/Snapper.dmg">
+                        <i class="fa-brands fa-apple" aria-hidden="true"></i>
+                        Download DMG
+                    </a>
+                    <a class="snapper-button snapper-button--ghost" href="https://github.com/gustavocaiano/snapper"
+                        target="_blank" rel="noopener noreferrer">
+                        <i class="fa-brands fa-github" aria-hidden="true"></i>
+                        View source
+                    </a>
+                </div>
+                <p class="snapper-disclaimer">
+                    Free local build · ad-hoc signed · not Developer ID notarized yet
+                </p>
+            </div>
+
+            <div class="snapper-hero__visual" aria-label="Snapper app preview">
+                <img src="../img/snapper-logo.svg" alt="Snapper app icon" class="snapper-logo-card">
+                <div class="snapper-monitor" aria-hidden="true">
+                    <div class="snapper-monitor__bar">
+                        <span></span><span></span><span></span>
+                    </div>
+                    <div class="snapper-zone snapper-zone--left"></div>
+                    <div class="snapper-zone snapper-zone--right"></div>
+                    <div class="snapper-window"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="snapper-strip" aria-label="Snapper highlights">
+            <div>
+                <span>100%</span>
+                <p>Free packaging path</p>
+            </div>
+            <div>
+                <span>macOS 13+</span>
+                <p>Swift and SwiftUI native</p>
+            </div>
+            <div>
+                <span>AX</span>
+                <p>Accessibility-powered window control</p>
+            </div>
+        </section>
+
+        <section class="snapper-section" aria-labelledby="features-title">
+            <div class="snapper-section__intro">
+                <p class="snapper-eyebrow">What it does</p>
+                <h2 id="features-title">Tiny app, precise workspace.</h2>
+            </div>
+            <div class="snapper-grid">
+                <article class="snapper-card">
+                    <i class="fa-solid fa-border-all" aria-hidden="true"></i>
+                    <h3>Custom snap zones</h3>
+                    <p>Create zones that match your real screens instead of forcing a fixed layout.</p>
+                </article>
+                <article class="snapper-card">
+                    <i class="fa-solid fa-keyboard" aria-hidden="true"></i>
+                    <h3>Global shortcuts</h3>
+                    <p>Move the focused window with fast hotkeys powered by native macOS APIs.</p>
+                </article>
+                <article class="snapper-card">
+                    <i class="fa-solid fa-display" aria-hidden="true"></i>
+                    <h3>On-screen editor</h3>
+                    <p>Draw zones directly over your displays for a workspace that mirrors how you work.</p>
+                </article>
+                <article class="snapper-card">
+                    <i class="fa-solid fa-toggle-on" aria-hidden="true"></i>
+                    <h3>Menu bar control</h3>
+                    <p>Snapper stays out of the Dock and lives quietly where utility apps belong.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="snapper-section snapper-section--split" aria-labelledby="how-title">
+            <div class="snapper-section__intro">
+                <p class="snapper-eyebrow">How it works</p>
+                <h2 id="how-title">Choose a zone. Snap the focused window. Keep moving.</h2>
+                <p>
+                    Snapper stores your layout locally, listens for global shortcuts, and uses Accessibility permission
+                    to resize windows with native macOS window APIs.
+                </p>
+            </div>
+            <ol class="snapper-steps">
+                <li><span>01</span> Build or download Snapper for macOS.</li>
+                <li><span>02</span> Grant Accessibility permission when prompted.</li>
+                <li><span>03</span> Create custom zones for your screens.</li>
+                <li><span>04</span> Trigger zones from the menu bar or shortcuts.</li>
+            </ol>
+        </section>
+
+        <section id="install" class="snapper-section snapper-section--split" aria-labelledby="install-title">
+            <div class="snapper-panel">
+                <p class="snapper-eyebrow">Install</p>
+                <h2 id="install-title">Drag Snapper into Applications.</h2>
+                <p>
+                    The DMG layout includes <strong>Snapper.app</strong>, an <strong>Applications</strong> shortcut, and
+                    install guidance. After copying the app, you can launch Snapper without repository terminal scripts.
+                </p>
+            </div>
+            <div class="snapper-install-card">
+                <ol>
+                    <li><strong>Open</strong> <code>Snapper.dmg</code></li>
+                    <li><strong>Drag</strong> Snapper.app to Applications</li>
+                    <li><strong>Launch</strong> from <code>/Applications</code></li>
+                    <li><strong>Allow</strong> Accessibility permission</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="trust" class="snapper-section snapper-trust" aria-labelledby="trust-title">
+            <div>
+                <p class="snapper-eyebrow">Trust notes</p>
+                <h2 id="trust-title">Free today, notarized path later.</h2>
+                <p>
+                    The free DMG is ad-hoc signed and not Developer ID notarized. macOS may show Gatekeeper warnings on
+                    first launch, so use right-click → Open or Privacy & Security approval if needed. Developer ID signing
+                    and notarization are the future path for smoother public distribution.
+                </p>
+            </div>
+            <pre aria-label="Build Snapper from source"><code>git clone https://github.com/gustavocaiano/snapper.git
+cd snapper
+./scripts/package_dmg.sh</code></pre>
+        </section>
+    </main>
+
+    <footer class="snapper-footer">
+        <p>Built by <a href="/">Gustavo Caiano</a>. Snapper is open source and native to macOS.</p>
+    </footer>
+
+    <script src="../translations.js?v=20260303-1"></script>
+    <script src="../script.js?v=20260303-1"></script>
+    <script type="module" src="../wave-background.js?v=20260320-1"></script>
+</body>
+
+</html>
