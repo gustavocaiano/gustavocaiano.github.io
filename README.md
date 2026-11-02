@@ -1,26 +1,14 @@
 # gustavocaiano.github.io
-Gustavo Caiano's personal website
 
-## Overview
-This is a responsive personal website built with HTML, Tailwind CSS, and vanilla JavaScript. The design features a black and red color scheme.
+Personal website: an alpine valley with a few tiny things to find.
 
-## Features
-- Responsive design that works on mobile and desktop
-- Animated elements for a modern feel
-- Clean and minimalist look
-- Built with Tailwind CSS for easy customization
+- **Log cabin** – about me, experience, education & how I can help · **Signpost** – one arrow per project
+- **Bald eagle** – contact form (EmailJS)
 
-## How to Modify
-1. **Content**: Edit the `index.html` file to change any text or links.
-2. **Styling**: The site uses Tailwind CSS via CDN. Customize the design by:
-   - Editing Tailwind classes in the HTML
-   - Modifying `styles.css` for custom CSS
-   - Adjusting the Tailwind configuration in the `<script>` tag in `index.html`
-3. **Profile image**: Replace the image in the `img/` directory or update the image path in `index.html`.
-4. **Animations**: Modify the JavaScript animations in `script.js`.
+## Structure
+- `index.html`, `home.css`, `home.js` – the homepage. The cabin and signpost are part of `img/valley.jpg`; `home.js` adds their hit areas, the smoke and the eagle; EN/PT copy lives at the top of that file.
+- `tools/render-valley.mjs` – regenerates `img/valley.jpg` from an eroded procedural terrain (`build`, then `render`; takes a few minutes). `tools/render-name-mask.mjs` (needs Playwright) rasterises the name for `render-valley.mjs name`, which writes `img/name-cloud.png`. Not needed at runtime.
+- `snapper/` – Snapper landing page. It still uses the legacy `styles.css`, `script.js`, `translations.js` and `wave-background.js`.
 
-## Deployment
-This site is automatically deployed to GitHub Pages. Any changes pushed to the main branch will be reflected on the live site.
-
-## Local Development
-Simply open `index.html` in your browser to view changes locally.
+## Local development
+No build step: `python3 -m http.server` and open http://localhost:8000. Pushing to `main` deploys via GitHub Pages.

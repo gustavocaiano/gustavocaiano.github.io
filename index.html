@@ -1,460 +1,163 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gustavo Caiano | Computer Engineer</title>
-
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml"
-        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' style='stop-color:%237FD0FF;stop-opacity:1' /><stop offset='100%25' style='stop-color:%234AA8E8;stop-opacity:1' /></linearGradient></defs><rect width='100' height='100' rx='20' fill='url(%23grad)'/><text x='50' y='65' font-family='system-ui,-apple-system,sans-serif' font-size='36' font-weight='bold' text-anchor='middle' fill='white'>GC</text></svg>">
-    <link rel="apple-touch-icon"
-        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' style='stop-color:%237FD0FF;stop-opacity:1' /><stop offset='100%25' style='stop-color:%234AA8E8;stop-opacity:1' /></linearGradient></defs><rect width='100' height='100' rx='20' fill='url(%23grad)'/><text x='50' y='65' font-family='system-ui,-apple-system,sans-serif' font-size='36' font-weight='bold' text-anchor='middle' fill='white'>GC</text></svg>">
-
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        'display': ['Outfit', 'sans-serif'],
-                        'mono': ['JetBrains Mono', 'monospace'],
-                    },
-                    colors: {
-                        'accent-cyan': '#7FD0FF',
-                        'accent-violet': '#4AA8E8',
-                        'accent-ice': '#A7E4FF',
-                        'dark-primary': '#05070A',
-                        'dark-secondary': '#060C14',
-                        'surface': '#08111B',
-                        'surface-2': '#0F1924',
-                    },
-                }
-            }
-        }
-    </script>
-    <link rel="stylesheet" href="styles.css?v=20260303-1">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <!-- EmailJS -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <title>Gustavo Caiano | Software Engineer</title>
+    <meta name="description" content="Gustavo Caiano — software engineer, AI native and product engineer.">
+    <meta property="og:title" content="Gustavo Caiano | Software Engineer">
+    <meta property="og:description" content="Software engineer, AI native and product engineer.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://gcaiano.xyz/">
+    <meta name="theme-color" content="#2467bd">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23dfe7ee'/%3E%3Cpath d='M4 52 24 18l10 16 8-12 18 30z' fill='%234d5f72'/%3E%3Cpath d='m24 18 7 11-5-2-3 4-4-5zM42 22l6 10-4-2-3 3-3-4z' fill='%23fff'/%3E%3C/svg%3E">
+    <meta property="og:image" content="https://gcaiano.xyz/img/valley.jpg">
+    <link rel="preload" as="image" href="img/valley.jpg">
+    <link rel="preload" as="image" href="img/name-cloud.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="home.css?v=20261102-19">
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js" defer></script>
 </head>
-
-<body class="min-h-screen opacity-0 transition-opacity duration-1000">
-    <!-- Atmospheric background layers -->
-    <canvas id="starfield" class="starfield" aria-hidden="true"></canvas>
-    <div class="mesh-gradient"></div>
-    <div class="noise-overlay"></div>
-    <div class="wave-background" id="waveBackground" aria-hidden="true">
-        <svg id="waveBackgroundSvg" class="wave-background__svg" xmlns="http://www.w3.org/2000/svg"></svg>
-        <div class="wave-background__pointer"></div>
+<body>
+    <!-- The mountain -->
+    <div class="scene" id="scene">
+        <svg id="mountain" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" role="group" aria-label="An alpine lake below a snow-capped massif, with a log cabin, a signpost by the road and a bald eagle">
+            <defs><filter id="smokeBlur" x="-300%" y="-300%" width="700%" height="700%"><feGaussianBlur stdDeviation="1.1"/></filter></defs>
+            <image href="img/valley.jpg" width="1600" height="900"/>
+            <g id="things"></g>
+        </svg>
     </div>
 
-    <!-- Floating orbs -->
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-    <div class="orb orb-3"></div>
-
-    <!-- Particles -->
-    <div class="fixed inset-0 overflow-hidden pointer-events-none">
-        <div class="particle particle-down absolute top-1/4 left-1/4 w-1.5 h-1.5 bg-accent-cyan rounded-full opacity-60"
-            style="animation: float 8s ease-in-out infinite;"></div>
-        <div class="particle particle-down absolute top-3/4 right-1/4 w-1 h-1 bg-accent-violet rounded-full opacity-50"
-            style="animation: float 10s ease-in-out infinite 1s;"></div>
-        <div class="particle particle-up absolute top-1/2 left-3/4 w-1 h-1 bg-accent-ice rounded-full opacity-40"
-            style="animation: float 12s ease-in-out infinite 2s;"></div>
-        <div class="particle particle-up absolute top-2/3 left-8 w-0.5 h-0.5 bg-accent-cyan rounded-full opacity-50"
-            style="animation: float 9s ease-in-out infinite 2.5s;"></div>
-        <div class="particle particle-up absolute top-1/4 right-12 w-1 h-1 bg-accent-violet rounded-full opacity-40"
-            style="animation: float 11s ease-in-out infinite 3s;"></div>
+    <!-- Chrome -->
+    <div class="sky-title">
+        <h1 class="sr-only">Gustavo Caiano</h1>
+        <img src="img/name-cloud.png" alt="" width="1600" height="373">
+        <p data-i18n="subtitle">Software Engineer · AI Native · Product Engineer</p>
     </div>
+    <div class="lang" role="group" aria-label="Language">
+        <button type="button" data-lang="en" aria-pressed="true">EN</button>
+        <button type="button" data-lang="pt" aria-pressed="false">PT</button>
+    </div>
+    <p class="hint">
+        <span class="hint-fine" data-i18n="hint">Look closely: a cabin, a signpost and a bald eagle are out there.</span>
+        <span class="hint-touch" data-i18n="hintTouch">Drag sideways to look around, tap what you find.</span>
+    </p>
+    <noscript><p class="noscript">Gustavo Caiano — Software Engineer · AI Native · Product Engineer. <a href="mailto:gustavocaiano@outlook.com">gustavocaiano@outlook.com</a> · <a href="https://github.com/gustavocaiano">GitHub</a></p></noscript>
 
-    <div class="container mx-auto px-6 py-16 relative z-10">
-        <!-- Header -->
-        <header class="flex flex-col items-center mb-24">
-            <!-- Profile Image -->
-            <div class="relative mb-8">
-                <div class="profile-glow"></div>
-                <div class="profile-ring">
-                    <div class="relative rounded-full overflow-hidden w-44 h-44 md:w-52 md:h-52">
-                        <img src="img/cv5_cropped.png" alt="Gustavo Caiano"
-                            class="w-full h-full object-cover transition-transform duration-500 hover:scale-110 profile-image">
-                    </div>
-                </div>
-            </div>
-
-            <!-- Name -->
-            <h1 class="text-4xl md:text-6xl lg:text-7xl font-display font-bold title-gradient mb-4 text-center">
-                Gustavo Caiano
-            </h1>
-
-            <!-- Subtitle -->
-            <p class="subtitle text-center mb-6" data-translate="subtitle">Laravel Full-Stack Engineer | Web Applications and Service Integrations</p>
-
-            <!-- Decorative divider -->
-            <div class="divider mt-2">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-
-            <!-- Language Selector -->
-            <div class="mt-8 flex flex-col items-center gap-4">
-                <a href="#contactSection" class="hero-contact-btn themed-link themed-link-button is-internal"
-                    data-translate="contactMe">Contact Me</a>
-                <select id="languageSelector" onchange="setLanguage(this.value)" class="language-select">
-                    <option value="en">🇺🇸 English</option>
-                    <option value="pt">🇵🇹 Português</option>
-                </select>
+    <!-- Everything about me (log cabin) -->
+    <dialog id="dlg-about" class="wooden wide" aria-labelledby="t-about">
+        <button class="close" type="button" data-close aria-label="Close" data-i18n-aria="close">&times;</button>
+        <header class="about-head">
+            <img src="img/cv5_cropped.png" alt="Gustavo Caiano" width="104" height="104">
+            <div>
+                <h2 id="t-about">Gustavo Caiano</h2>
+                <p class="role" data-i18n="subtitle">Software Engineer · AI Native · Product Engineer</p>
             </div>
         </header>
-
-        <main class="space-y-24">
-            <!-- About Section -->
-            <section class="animate-fade-in-up stagger-1" style="opacity: 0;">
-                <h2 class="section-title" data-translate="about">About Me</h2>
-                <div class="max-w-4xl mx-auto card">
-                    <p class="text-lg leading-relaxed text-slate-300 font-display" data-translate="aboutText">
-                        Bachelor's degree in Computer Engineering from Instituto Superior de Engenharia do Porto (ISEP),
-                        currently completing a Master's degree in Software Engineering at the same institution.
-                        Laravel-focused full-stack engineer building robust web applications.
-                    </p>
-                </div>
+        <p class="lead" data-i18n="aboutText">Bachelor's degree in Computer Engineering from Instituto Superior de Engenharia do Porto (ISEP), currently completing a Master's degree in Software Engineering at the same institution. Software engineer, AI native and product engineer building robust web applications.</p>
+        <div class="columns">
+            <section>
+                <h3 data-i18n="workExperience">Professional Experience</h3>
+                <article class="entry">
+                    <p class="tag" data-i18n="jobCurrent">Current Position</p>
+                    <h4><span data-i18n="jobTitle">Software Engineer</span> · <a href="https://novaforensic.com" target="_blank" rel="noopener">NovaForensic</a></h4>
+                    <p class="muted"><span data-i18n="jobType">Digital Forensics Company</span> · <span data-i18n="jobDate">February 2024 - Present</span></p>
+                    <p data-i18n="jobDescription">Working as a software engineer at NovaForensic, developing and maintaining software that supports criminal investigations while also contributing to infrastructure, networking, development processes, CI/CD pipelines, and team training.</p>
+                </article>
+                <h3 data-i18n="academic">Academic Background</h3>
+                <article class="entry">
+                    <h4 data-i18n="masterDegree">Master's in Software Engineering</h4>
+                    <p class="muted"><span data-i18n="university">Instituto Superior de Engenharia do Porto (ISEP)</span> · <span data-i18n="inProgress">In progress</span></p>
+                </article>
+                <article class="entry">
+                    <h4 data-i18n="bachelorDegree">Bachelor's in Computer Engineering</h4>
+                    <p class="muted"><span data-i18n="university">Instituto Superior de Engenharia do Porto (ISEP)</span> · <span data-i18n="completed">Completed</span></p>
+                </article>
+                <h3 data-i18n="howICanHelp">How I Can Help</h3>
+                <article class="entry">
+                    <h4 data-i18n="personalProjects">Full-Stack Product Development</h4>
+                    <p data-i18n="personalProjectsText">Need to launch a full-stack product, internal platform, or web service? I can help from architecture through deployment with a practical, maintainable approach.</p>
+                </article>
+                <article class="entry">
+                    <h4 data-i18n="softwareConsulting">Software Engineering Consulting</h4>
+                    <p data-i18n="softwareConsultingText">Need support with architecture, code review, integrations, feature delivery, or development workflows? I provide practical software engineering consulting.</p>
+                </article>
             </section>
-
-            <!-- Skills Section -->
-            <section class="animate-fade-in-up stagger-2" style="opacity: 0;">
-                <h2 class="section-title" data-translate="skills">My Specialties</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-                    <!-- Web Development -->
-                    <div class="card skill-card opacity-0 translate-y-4 transition-all duration-500">
-                        <div class="skill-icon">
-                            <i class="fas fa-code"></i>
-                        </div>
-                        <h3 class="skill-title" data-translate="skillWeb">Web Development</h3>
-                        <p class="skill-text" data-translate="skillWebText">Laravel & Filament PHP, REST APIs, Vue.js,
-                            React, Next.js</p>
-                        <div class="skill-bar">
-                            <div class="skill-bar-fill"></div>
-                        </div>
-                    </div>
-
-                    <!-- Software Architecture -->
-                    <div class="card skill-card opacity-0 translate-y-4 transition-all duration-500">
-                        <div class="skill-icon">
-                            <i class="fas fa-layer-group"></i>
-                        </div>
-                        <h3 class="skill-title" data-translate="skillArchitecture">Software Architecture</h3>
-                        <p class="skill-text" data-translate="skillArchitectureText">Modular & Scalable Design, Layered
-                            Architecture, Design Patterns, Microservices</p>
-                        <div class="skill-bar">
-                            <div class="skill-bar-fill"></div>
-                        </div>
-                    </div>
-
-                    <!-- AI Automation & Integration -->
-                    <div class="card skill-card opacity-0 translate-y-4 transition-all duration-500">
-                        <div class="skill-icon">
-                            <i class="fas fa-brain"></i>
-                        </div>
-                        <h3 class="skill-title" data-translate="skillAI">AI Automation &amp; Integration</h3>
-                        <p class="skill-text" data-translate="skillAIText">Experience with AI automation in company workflows and integrating AI capabilities into services.</p>
-                        <div class="skill-bar">
-                            <div class="skill-bar-fill"></div>
-                        </div>
-                    </div>
-
-                    <!-- Cybersecurity & Networks -->
-                    <div class="card skill-card opacity-0 translate-y-4 transition-all duration-500">
-                        <div class="skill-icon">
-                            <i class="fas fa-shield-alt"></i>
-                        </div>
-                        <h3 class="skill-title" data-translate="skillSecurity">Cybersecurity & Networks</h3>
-                        <p class="skill-text" data-translate="skillSecurityText">Firewall Policies, VPNs, Network
-                            Security, Secure Software Development</p>
-                        <div class="skill-bar">
-                            <div class="skill-bar-fill"></div>
-                        </div>
-                    </div>
-
-                    <!-- DevOps & Tools -->
-                    <div class="card skill-card opacity-0 translate-y-4 transition-all duration-500">
-                        <div class="skill-icon">
-                            <i class="fas fa-tools"></i>
-                        </div>
-                        <h3 class="skill-title" data-translate="skillTools">DevOps & Tools</h3>
-                        <p class="skill-text" data-translate="skillToolsText">Git, Docker, Linux, AWS, CI/CD Pipelines,
-                            SQL Databases</p>
-                        <div class="skill-bar">
-                            <div class="skill-bar-fill"></div>
-                        </div>
-                    </div>
-
-                    <!-- Software Engineering -->
-                    <div class="card skill-card opacity-0 translate-y-4 transition-all duration-500">
-                        <div class="skill-icon">
-                            <i class="fas fa-cogs"></i>
-                        </div>
-                        <h3 class="skill-title" data-translate="skillSoftware">Software Engineering</h3>
-                        <p class="skill-text" data-translate="skillSoftwareText">Agile Methodologies, Parallel
-                            Programming, Full-Stack Development</p>
-                        <div class="skill-bar">
-                            <div class="skill-bar-fill"></div>
-                        </div>
-                    </div>
-                </div>
+            <section>
+                <h3 data-i18n="skills">My Specialties</h3>
+                <dl class="skills">
+                    <div><dt data-i18n="skillWeb">Web Development</dt><dd data-i18n="skillWebText">REST APIs, Vue.js, React, Next.js</dd></div>
+                    <div><dt data-i18n="skillArchitecture">Software Architecture</dt><dd data-i18n="skillArchitectureText">Pragmatic modular design, layered architecture, design patterns, maintainable service boundaries</dd></div>
+                    <div><dt data-i18n="skillAI">AI Automation &amp; Integration</dt><dd data-i18n="skillAIText">Experience with AI automation in company workflows and integrating AI capabilities into services.</dd></div>
+                    <div><dt data-i18n="skillSecurity">Cybersecurity &amp; Networks</dt><dd data-i18n="skillSecurityText">Firewall Policies, VPNs, Network Security, Secure Software Development</dd></div>
+                    <div><dt data-i18n="skillTools">DevOps &amp; Tools</dt><dd data-i18n="skillToolsText">Git, Docker, Linux, AWS, CI/CD pipelines, SQL databases, testing workflows</dd></div>
+                    <div><dt data-i18n="skillSoftware">Software Engineering</dt><dd data-i18n="skillSoftwareText">Agile Methodologies, Parallel Programming, Full-Stack Development</dd></div>
+                </dl>
             </section>
+        </div>
+    </dialog>
 
-            <!-- Work Experience Section -->
-            <section class="animate-fade-in-up stagger-3" style="opacity: 0;">
-                <h2 class="section-title" data-translate="workExperience">Professional Experience</h2>
-                <div class="max-w-4xl mx-auto">
-                    <div class="card experience-card">
-                        <div class="experience-badge">
-                            <i class="fas fa-circle text-xs animate-pulse"></i>
-                            <span data-translate="jobCurrent">Current Position</span>
-                        </div>
+    <!-- Projects (signpost): one arrow per project -->
+    <dialog id="dlg-projects" class="signpost" aria-labelledby="t-projects">
+        <button class="close" type="button" data-close aria-label="Close" data-i18n-aria="close">&times;</button>
+        <h2 id="t-projects" class="sr-only" data-i18n="projectsShowcase">Projects &amp; Public Solutions</h2>
+        <nav class="post">
+            <a class="arrow right" href="https://www.tubeshuffle.online/" target="_blank" rel="noopener"><b>TubeShuffle</b><span data-i18n="liveDemo">Live Demo</span></a>
+            <a class="arrow left" href="/snapper/"><b>Snapper</b><span data-i18n="landing">Landing Page</span></a>
+            <a class="arrow right" href="https://kbplus.gcaiano.xyz/" target="_blank" rel="noopener"><b>KB+</b><span data-i18n="liveDemo">Live Demo</span></a>
+            <a class="arrow left" href="https://github.com/gustavocaiano/oscar" target="_blank" rel="noopener"><b>Oscar</b><span>GitHub</span></a>
+            <a class="arrow right" href="https://github.com/gustavocaiano/ghostty-herd" target="_blank" rel="noopener"><b>ghostty-herd</b><span>GitHub</span></a>
+            <a class="arrow left" href="https://github.com/gustavocaiano/yt-loop-extension" target="_blank" rel="noopener"><b>yt-loop-extension</b><span>GitHub</span></a>
+        </nav>
+    </dialog>
 
-                        <div class="flex items-start justify-between flex-wrap gap-6">
-                            <div class="flex-1 min-w-0">
-                                <h3 class="text-2xl font-display font-bold mb-3" data-translate="jobTitle">Software
-                                    Engineer</h3>
-                                <p class="text-accent-cyan mb-2 flex items-center gap-2 flex-wrap">
-                                    <i class="fas fa-building"></i>
-                                    <a href="https://novaforensic.com" target="_blank"
-                                        class="themed-link themed-link-inline is-external"
-                                        data-translate="jobCompany">NovaForensic</a>
-                                    <span class="text-slate-400 font-mono text-sm">| <span
-                                            data-translate="jobType">Digital Forensics Company</span></span>
-                                </p>
-                                <p class="text-accent-violet mb-3 flex items-center gap-2 font-mono text-sm">
-                                    <i class="fas fa-calendar-alt"></i>
-                                    <span data-translate="jobDate">February 2024 - Present</span>
-                                </p>
-                                <p class="text-slate-300 leading-relaxed" data-translate="jobDescription">Working
-                                    as a software engineer at NovaForensic, developing and maintaining software that supports criminal investigations while also contributing to infrastructure, networking, development processes, CI/CD pipelines, and team training.</p>
-                            </div>
-                            <div class="text-accent-cyan/20 text-6xl">
-                                <i class="fas fa-search"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+    <!-- Contact (bald eagle) -->
+    <dialog id="dlg-contact" class="wooden" aria-labelledby="t-contact">
+        <button class="close" type="button" data-close aria-label="Close" data-i18n-aria="close">&times;</button>
+        <h2 id="t-contact" data-i18n="getInTouch">Get In Touch</h2>
+        <form id="contactForm">
+            <div class="row">
+                <label>
+                    <span data-i18n="firstName">First Name</span>
+                    <input type="text" name="firstName" required autocomplete="given-name">
+                </label>
+                <label>
+                    <span data-i18n="lastName">Last Name</span>
+                    <input type="text" name="lastName" required autocomplete="family-name">
+                </label>
+            </div>
+            <label>
+                <span data-i18n="emailAddress">Email Address</span>
+                <input type="email" name="email" required autocomplete="email">
+            </label>
+            <label>
+                <span data-i18n="subject">Subject</span>
+                <input list="subjects" name="subject" required data-i18n-ph="selectSubject" placeholder="Select or type a subject">
+                <datalist id="subjects"></datalist>
+            </label>
+            <label>
+                <span data-i18n="message">Message</span>
+                <textarea name="message" rows="5" required data-i18n-ph="messagePlaceholder" placeholder="Tell me about your project or inquiry..."></textarea>
+            </label>
+            <div class="actions">
+                <button type="submit" class="btn primary" id="submitBtn" data-i18n="sendMessage">Send Message</button>
+                <a class="btn" href="mailto:gustavocaiano@outlook.com" data-i18n="directEmail">Direct Email</a>
+                <a class="btn" href="https://github.com/gustavocaiano" target="_blank" rel="noopener">GitHub</a>
+            </div>
+            <p id="formStatus" role="status" aria-live="polite"></p>
+        </form>
+    </dialog>
 
-            <!-- Academic Section -->
-            <section class="animate-fade-in-up stagger-4" style="opacity: 0;">
-                <h2 class="section-title" data-translate="academic">Academic Background</h2>
-                <div class="max-w-4xl mx-auto space-y-6">
-                    <!-- Master's -->
-                    <div class="card timeline-item">
-                        <h3 class="text-xl font-display font-bold mb-2" data-translate="masterDegree">Master's in
-                            Software Engineering</h3>
-                        <p class="text-accent-cyan mb-1 flex items-center gap-2">
-                            <i class="fas fa-university"></i>
-                            <span data-translate="university">Instituto Superior de Engenharia do Porto (ISEP)</span>
-                        </p>
-                        <p class="text-accent-violet flex items-center gap-2 font-mono text-sm">
-                            <i class="fas fa-clock"></i>
-                            <span data-translate="inProgress">In progress</span>
-                        </p>
-                    </div>
+    <footer class="foot">
+        <span class="copy">&copy; <span id="year">2026</span> Gustavo Caiano</span>
+        <button type="button" data-target="dlg-contact" data-i18n="footContact">Contact</button>
+        <a href="https://github.com/gustavocaiano" target="_blank" rel="noopener" aria-label="GitHub">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+        </a>
+    </footer>
 
-                    <!-- Bachelor's -->
-                    <div class="card timeline-item">
-                        <h3 class="text-xl font-display font-bold mb-2" data-translate="bachelorDegree">Bachelor's in
-                            Computer Engineering</h3>
-                        <p class="text-accent-cyan mb-1 flex items-center gap-2">
-                            <i class="fas fa-university"></i>
-                            <span data-translate="university">Instituto Superior de Engenharia do Porto (ISEP)</span>
-                        </p>
-                        <p class="text-accent-violet flex items-center gap-2 font-mono text-sm">
-                            <i class="fas fa-check-circle"></i>
-                            <span data-translate="completed">Completed</span>
-                        </p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- How I Can Help Section -->
-            <section class="animate-fade-in-up" style="opacity: 0;">
-                <h2 class="section-title" data-translate="howICanHelp">How I Can Help</h2>
-                <div class="max-w-4xl mx-auto">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <!-- Personal Projects -->
-                        <div class="card service-card text-center">
-                            <div class="service-icon">
-                                <i class="fas fa-laptop-code"></i>
-                            </div>
-                            <h3 class="text-xl font-display font-bold mb-3 text-accent-cyan"
-                                data-translate="personalProjects">Full-Stack Product Development</h3>
-                            <p class="text-slate-300 leading-relaxed" data-translate="personalProjectsText">
-                                Need to launch a full-stack product, internal platform, or web service? I can help
-                                from architecture through deployment with a practical, maintainable approach, with
-                                Laravel as a strong focus when it fits.
-                            </p>
-                        </div>
-
-                        <!-- Software Consulting -->
-                        <div class="card service-card text-center">
-                            <div class="service-icon">
-                                <i class="fas fa-handshake"></i>
-                            </div>
-                            <h3 class="text-xl font-display font-bold mb-3 text-accent-violet"
-                                data-translate="softwareConsulting">Software Engineering Consulting</h3>
-                            <p class="text-slate-300 leading-relaxed" data-translate="softwareConsultingText">
-                                Need support with architecture, code review, integrations, feature delivery, or
-                                development workflows? I provide practical software engineering consulting, with strong
-                                Laravel expertise but not limited to that stack.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Projects Section -->
-            <section class="animate-fade-in-up" style="opacity: 0;">
-                <h2 class="section-title" data-translate="projectsShowcase">Projects & Public Solutions</h2>
-                <div class="max-w-5xl mx-auto card projects-showcase-card">
-                    <p class="projects-showcase-intro" data-translate="projectsShowcaseIntro">
-                        A quick list of public repositories and live products that reflect my full-stack and software
-                        engineering work, with Laravel as a core focus.
-                    </p>
-                    <details class="projects-collapse" open>
-                        <summary>
-                            <span data-translate="projectsShowcaseToggle">Browse featured links</span>
-                            <span class="projects-collapse-meta">6</span>
-                        </summary>
-                        <div class="projects-showcase-grid">
-                            <!-- 1. TubeShuffle -->
-                            <a href="https://www.tubeshuffle.online/" target="_blank" rel="noopener"
-                                class="projects-showcase-item themed-link themed-link-card is-external">
-                                <span class="projects-showcase-name">TubeShuffle</span>
-                                <span class="projects-showcase-type" data-translate="liveDemo">Live Demo</span>
-                            </a>
-                            <!-- 2. Snapper -->
-                            <a href="/snapper/"
-                                class="projects-showcase-item themed-link themed-link-card is-internal">
-                                <span class="projects-showcase-name">Snapper</span>
-                                <span class="projects-showcase-type">Landing Page</span>
-                            </a>
-                            <!-- 3. KB+ -->
-                            <a href="https://kbplus.gcaiano.xyz/" target="_blank" rel="noopener"
-                                class="projects-showcase-item themed-link themed-link-card is-external">
-                                <span class="projects-showcase-name">KB+</span>
-                                <span class="projects-showcase-type" data-translate="liveDemo">Live Demo</span>
-                            </a>
-                            <!-- 4. Oscar -->
-                            <a href="https://github.com/gustavocaiano/oscar" target="_blank" rel="noopener"
-                                class="projects-showcase-item themed-link themed-link-card is-external">
-                                <span class="projects-showcase-name">Oscar</span>
-                                <span class="projects-showcase-type" data-translate="github">GitHub</span>
-                            </a>
-                            <!-- 5. ghostty-herd -->
-                            <a href="https://github.com/gustavocaiano/ghostty-herd" target="_blank" rel="noopener"
-                                class="projects-showcase-item themed-link themed-link-card is-external">
-                                <span class="projects-showcase-name">ghostty-herd</span>
-                                <span class="projects-showcase-type" data-translate="github">GitHub</span>
-                            </a>
-                            <!-- 6. yt-loop-extension -->
-                            <a href="https://github.com/gustavocaiano/yt-loop-extension" target="_blank"
-                                rel="noopener" class="projects-showcase-item themed-link themed-link-card is-external">
-                                <span class="projects-showcase-name">yt-loop-extension</span>
-                                <span class="projects-showcase-type" data-translate="github">GitHub</span>
-                            </a>
-                        </div>
-                    </details>
-                </div>
-            </section>
-
-            <!-- Contact Section -->
-            <section id="contactSection" class="mb-12 animate-fade-in-up" style="opacity: 0;">
-                <h2 class="section-title" data-translate="getInTouch">Get In Touch</h2>
-                <div class="max-w-2xl mx-auto">
-                    <!-- Contact Form -->
-                    <form id="contactForm" class="card mb-10">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                            <div>
-                                <label for="firstName" class="form-label" data-translate="firstName">First Name</label>
-                                <input type="text" id="firstName" name="firstName" required class="form-input">
-                            </div>
-                            <div>
-                                <label for="lastName" class="form-label" data-translate="lastName">Last Name</label>
-                                <input type="text" id="lastName" name="lastName" required class="form-input">
-                            </div>
-                        </div>
-                        <div class="mb-6">
-                            <label for="email" class="form-label" data-translate="emailAddress">Email Address</label>
-                            <input type="email" id="email" name="email" required class="form-input">
-                        </div>
-                        <div class="mb-6">
-                            <label for="subject" class="form-label" data-translate="subject">Subject</label>
-                            <input list="subjects" id="subject" name="subject" required class="form-input" 
-                                data-translate="selectSubject" placeholder="Select or type a subject">
-                            <datalist id="subjects">
-                                <!-- Options will be populated by JS -->
-                            </datalist>
-                        </div>
-                        <div class="mb-8">
-                            <label for="message" class="form-label" data-translate="message">Message</label>
-                            <textarea id="message" name="message" rows="5" required
-                                class="form-input resize-y min-h-[140px]"
-                                data-translate="messagePlaceholder"></textarea>
-                        </div>
-                        <button type="submit" id="submitBtn" class="form-button">
-                            <span class="submit-text" data-translate="sendMessage">Send Message</span>
-                            <span class="loading-text hidden" data-translate="sending">
-                                <i class="fas fa-spinner fa-spin mr-2"></i>Sending...
-                            </span>
-                        </button>
-
-                        <!-- Status Messages -->
-                        <div id="statusMessage" class="mt-6 p-4 rounded-xl hidden">
-                            <div id="successMessage" class="hidden status-success flex items-center gap-2">
-                                <i class="fas fa-check-circle"></i>
-                                <span data-translate="successMessage">Thank you! Your message has been sent
-                                    successfully. I'll get back to you soon.</span>
-                            </div>
-                            <div id="errorMessage" class="hidden status-error flex items-center gap-2">
-                                <i class="fas fa-exclamation-circle"></i>
-                                <span data-translate="errorMessage">Sorry, there was an error sending your message.
-                                    Please try again or contact me directly.</span>
-                            </div>
-                        </div>
-                    </form>
-
-                    <!-- Social Links -->
-                    <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
-                        <a href="https://github.com/gustavocaiano" class="social-button themed-link themed-link-button is-external" target="_blank" rel="noopener">
-                            <i class="fab fa-github"></i>
-                            <span data-translate="github">GitHub</span>
-                        </a>
-                        <a href="mailto:gustavocaiano@outlook.com" class="social-button themed-link themed-link-button is-external">
-                            <i class="fas fa-envelope"></i>
-                            <span data-translate="directEmail">Direct Email</span>
-                        </a>
-                    </div>
-                </div>
-            </section>
-        </main>
-
-        <!-- Footer -->
-        <footer class="footer mt-24">
-            <p class="font-display">&copy; <span class="copyright-year">2025</span> Gustavo Caiano. <span
-                    data-translate="footerRights">All rights reserved.</span></p>
-            <p class="footer-built mt-2" data-translate="footerBuilt">Built with passion and modern web technologies</p>
-        </footer>
-    </div>
-
-    <!-- Sticky Contact Button -->
-    <a href="#contactSection" id="stickyContactBtn"
-        class="sticky-contact-btn themed-link themed-link-button is-internal" data-translate="contactMe">
-        Contact Me
-    </a>
-
-    <script src="translations.js?v=20260303-1"></script>
-    <script src="script.js?v=20260303-1"></script>
-    <script type="module" src="wave-background.js?v=20260320-1"></script>
+    <script src="home.js?v=20261102-19"></script>
 </body>
-
 </html>
