@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BCTask | Menu-bar todos for macOS</title>
+    <meta name="description" content="BCTask is a lightweight native macOS menu-bar todo app with list and kanban views, notes and pinned tasks.">
+    <link rel="icon" href="../img/bctask-icon.svg" type="image/svg+xml">
+    <style>
+        :root { color-scheme: dark; }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr);
+            place-items: center;
+            padding: 48px 20px;
+            background: #050505;
+            color: #f5f5f5;
+            font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+        }
+        main { width: min(100%, 520px); }
+        img { display: block; width: 88px; height: 88px; margin-left: -6px; }
+        h1 { margin: 16px 0 4px; font-size: 32px; line-height: 1.2; }
+        p { margin: 0; color: #a8a8a8; }
+        ul { margin: 28px 0; padding: 0; list-style: none; }
+        li { padding: 3px 0; }
+        li::before { content: "–"; margin-right: 10px; color: #45e3f2; }
+        pre {
+            margin: 0 0 12px;
+            padding: 14px 16px;
+            overflow-x: auto;
+            border: 1px solid #262626;
+            border-radius: 10px;
+            background: #111;
+            font: 14px/1.7 ui-monospace, SFMono-Regular, Menlo, monospace;
+        }
+        small { display: block; color: #8a8a8a; }
+        nav { display: flex; gap: 20px; margin-top: 28px; }
+        a { color: #45e3f2; text-underline-offset: 3px; }
+    </style>
+</head>
+<body>
+    <main>
+        <img src="../img/bctask-icon.svg" alt="" width="88" height="88">
+        <h1>BCTask</h1>
+        <p>A lightweight, native todo app that lives in your Mac's menu bar.</p>
+        <ul>
+            <li>List and kanban views</li>
+            <li>A free-form note on every task, with clickable links</li>
+            <li>Pin any task in an always-on-top panel</li>
+            <li>Completed tasks archive themselves after an hour</li>
+        </ul>
+        <pre><code>git clone https://github.com/gustavocaiano/bctask.git
+cd bctask
+scripts/install-app.sh</code></pre>
+        <small>Needs macOS 13 or later and the Swift command line tools.</small>
+        <nav>
+            <a href="https://github.com/gustavocaiano/bctask">GitHub</a>
+            <a href="/">gcaiano.xyz</a>
+        </nav>
+    </main>
+</body>
+</html>

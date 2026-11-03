@@ -322,8 +322,8 @@ function buildProps() {
     // signpost: a post with one arrow board per project
     const pf = frame(POST.x, PLAIN - 0.1, POST.z, 0.1, POST.k);
     box(pf, -0.13, 0.13, 0, 5.2, -0.13, 0.13, TIMBER, 1);
-    for (let i = 0; i < 6; i++) {
-        const y = 4.75 - i * 0.68, dir = i % 2 ? -1 : 1, len = 1.75 - (i % 3) * 0.12, tail = -0.26 * dir, tip = dir * (len + 0.26);
+    for (let i = 0; i < 4; i++) {
+        const y = 4.75 - i * 0.95, dir = i % 2 ? -1 : 1, len = 1.75 - (i % 3) * 0.12, tail = -0.26 * dir, tip = dir * (len + 0.26);
         const hw = 0.23, a = [dir * len, y + hw, 0], c = [dir * len, y - hw, 0], run = Math.abs(tip - a[0]);
         solid(pf, [
             [[0, 1, 0], [0, y + hw, 0]], [[0, -1, 0], [0, y - hw, 0]],
